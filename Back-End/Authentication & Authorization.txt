@@ -1,0 +1,47 @@
+#2. Authentication & Authorization
+----
+
+# User Login
+- End Point: 
+- POST /api/auth/login
+
+-----
+## Request:
+- {
+  "email": "user@example.com",
+  "password": "securepassword"
+}
+
+------
+
+## Response
+- {
+  "token": "eyJhbGciOiJIUzI1NiIsIn...",
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "role": "admin"
+  }
+}
+------
+
+# User Registration:
+- End Point:
+- POST /api/auth/register
+
+## Request
+{
+  "name": "John Doe",
+  "email": "user@example.com",
+  "password": "securepassword"
+}
+
+## Response: 
+- {
+  "message": "User registered successfully",
+  "user": {
+    "id": 1,
+    "name": "John Doe",
+    "email": "user@example.com"
+  }
+}

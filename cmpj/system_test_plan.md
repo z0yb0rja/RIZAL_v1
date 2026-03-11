@@ -2,6 +2,18 @@
 
 This document outlines the required verification tests for the VALID8 platform and the number of successful attempts needed to consider each feature "stable."
 
+## 0. Stability Criteria (Acceptance Thresholds)
+- Manual attempts: 100% pass required; any critical error is a fail.
+- Automated iterations: >= 98% success rate; no critical errors.
+- Error cases: 100% must return expected status codes and messages.
+- Multi-tenant isolation: 0 cross-tenant data leaks in 200+ attempts.
+- Latency targets (p95/p99):
+Auth/profile endpoints: p95 <= 500 ms, p99 <= 1,000 ms.
+Event/attendance endpoints: p95 <= 800 ms, p99 <= 1,500 ms.
+Bulk import per 1,000 rows: <= 20 s; error report <= 5 s after completion.
+Export generation for 10,000 rows: <= 30 s.
+- Adjust targets based on deployment scale and infrastructure.
+
 ## 1. Authentication and Access Control
 | Feature to Test | Manual Attempts | Automated Iterations | Error Cases to Test |
 | :--- | :---: | :---: | :--- |
@@ -56,4 +68,3 @@ To keep data clean across different table structures, automated results will be 
 
 *   **Format**: **PSV (Pipe-Separated Values)**.
 *   **Spreadsheet Compatibility**: YES. You can import `.psv` files into **Microsoft Excel** and **Google Sheets** by clicking "Import" or "Open" and selecting "Other" or "Custom" for the delimiter, then typing the pipe symbol `|`.
-

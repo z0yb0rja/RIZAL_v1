@@ -5846,7 +5846,7 @@
                             "character_maximum_length": null
                         },
                         {
-                            "default": "'#162F65'::character varying",
+                            "default": "'#162F65FF'::character varying",
                             "udt_name": "varchar",
                             "data_type": "character varying",
                             "column_name": "primary_color",
@@ -5861,7 +5861,7 @@
                             "character_maximum_length": 7
                         },
                         {
-                            "default": "'#2C5F9E'::character varying",
+                            "default": "'#2C5F9EFF'::character varying",
                             "udt_name": "varchar",
                             "data_type": "character varying",
                             "column_name": "secondary_color",
@@ -5876,7 +5876,7 @@
                             "character_maximum_length": 7
                         },
                         {
-                            "default": "'#4A90E2'::character varying",
+                            "default": "'#4A90E2FF'::character varying",
                             "udt_name": "varchar",
                             "data_type": "character varying",
                             "column_name": "accent_color",
@@ -6608,7 +6608,7 @@
                             "character_maximum_length": 50
                         },
                         {
-                            "default": "'#162F65'::character varying",
+                            "default": "'#162F65FF'::character varying",
                             "udt_name": "varchar",
                             "data_type": "character varying",
                             "column_name": "primary_color",

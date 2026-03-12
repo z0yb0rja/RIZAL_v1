@@ -970,9 +970,9 @@ ALTER SEQUENCE public.school_audit_logs_id_seq OWNED BY public.school_audit_logs
 
 CREATE TABLE public.school_settings (
     school_id integer NOT NULL,
-    primary_color character varying(7) DEFAULT '#162F65'::character varying NOT NULL,
-    secondary_color character varying(7) DEFAULT '#2C5F9E'::character varying NOT NULL,
-    accent_color character varying(7) DEFAULT '#4A90E2'::character varying NOT NULL,
+    primary_color character varying(7) DEFAULT '#162F65FF'::character varying NOT NULL,
+    secondary_color character varying(7) DEFAULT '#2C5F9EFF'::character varying NOT NULL,
+    accent_color character varying(7) DEFAULT '#4A90E2FF'::character varying NOT NULL,
     updated_at timestamp without time zone DEFAULT now() NOT NULL,
     updated_by_user_id integer
 );
@@ -1048,7 +1048,7 @@ CREATE TABLE public.schools (
     updated_at timestamp without time zone DEFAULT now() NOT NULL,
     school_name character varying(255) NOT NULL,
     school_code character varying(50),
-    primary_color character varying(7) DEFAULT '#162F65'::character varying NOT NULL,
+    primary_color character varying(7) DEFAULT '#162F65FF'::character varying NOT NULL,
     secondary_color character varying(7),
     subscription_status character varying(30) DEFAULT 'trial'::character varying NOT NULL,
     active_status boolean DEFAULT true NOT NULL
@@ -2297,9 +2297,9 @@ COPY public.school_audit_logs (id, school_id, actor_user_id, action, status, det
 --
 
 COPY public.school_settings (school_id, primary_color, secondary_color, accent_color, updated_at, updated_by_user_id) FROM stdin;
-3	#162F65	#2C5F9E	#4A90E2	2026-03-05 06:12:01.649996	\N
-4	#ffd500	#ffffff	#ffffff	2026-03-05 06:13:51.81089	1
-5	#9e0000	#ffdd00	#ffdd00	2026-03-05 13:10:33.670378	1
+3	#162F65FF	#2C5F9EFF	#4A90E2FF	2026-03-05 06:12:01.649996	\N
+4	#ffd500FF	#ffffffFF	#ffffffFF	2026-03-05 06:13:51.81089	1
+5	#9e0000FF	#ffdd00FF	#ffdd00FF	2026-03-05 13:10:33.670378	1
 \.
 
 
@@ -2328,9 +2328,9 @@ COPY public.school_subscription_settings (school_id, plan_name, user_limit, even
 --
 
 COPY public.schools (id, name, address, logo_url, subscription_plan, subscription_start, subscription_end, created_at, updated_at, school_name, school_code, primary_color, secondary_color, subscription_status, active_status) FROM stdin;
-3	Default School	Default Address	\N	free	2026-03-05	\N	2026-03-05 06:12:01.604946	2026-03-05 06:12:01.60495	Default School	\N	#162F65	#2C5F9E	trial	t
-4	Misamis University	Misamis University Address	/media/school-logos/f8e19b6147b4487fbafa0c576690deed.jpg	free	2026-03-05	\N	2026-03-05 06:13:51.5426	2026-03-05 06:13:51.542606	Misamis University	\N	#ffd500	#ffffff	trial	t
-5	Andress Bonifacio College	Andress Bonifacio College Address	/media/school-logos/4c9c4e1464a54514b5ccca7cf8b924aa.png	free	2026-03-05	\N	2026-03-05 13:10:33.067816	2026-03-05 13:10:33.067834	Andress Bonifacio College	\N	#9e0000	#ffdd00	trial	t
+3	Default School	Default Address	\N	free	2026-03-05	\N	2026-03-05 06:12:01.604946	2026-03-05 06:12:01.60495	Default School	\N	#162F65FF	#2C5F9EFF	trial	t
+4	Misamis University	Misamis University Address	/media/school-logos/f8e19b6147b4487fbafa0c576690deed.jpg	free	2026-03-05	\N	2026-03-05 06:13:51.5426	2026-03-05 06:13:51.542606	Misamis University	\N	#ffd500FF	#ffffffFF	trial	t
+5	Andress Bonifacio College	Andress Bonifacio College Address	/media/school-logos/4c9c4e1464a54514b5ccca7cf8b924aa.png	free	2026-03-05	\N	2026-03-05 13:10:33.067816	2026-03-05 13:10:33.067834	Andress Bonifacio College	\N	#9e0000FF	#ffdd00FF	trial	t
 \.
 
 

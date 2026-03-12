@@ -15,8 +15,8 @@ class School(Base):
     school_code = Column(String(50), nullable=True, unique=True, index=True)
     address = Column(String(500), nullable=False)
     logo_url = Column(String(1000), nullable=True)
-    primary_color = Column(String(7), nullable=False, default="#162F65")
-    secondary_color = Column(String(7), nullable=True)
+    primary_color = Column(String(9), nullable=False, default="#162F65FF")
+    secondary_color = Column(String(9), nullable=True)
     subscription_status = Column(String(30), nullable=False, default="trial")
     active_status = Column(Boolean, nullable=False, default=True)
     subscription_plan = Column(String(100), nullable=False, default="free")
@@ -54,9 +54,9 @@ class SchoolSetting(Base):
         ForeignKey("schools.id", ondelete="CASCADE"),
         primary_key=True,
     )
-    primary_color = Column(String(7), nullable=False, default="#162F65")
-    secondary_color = Column(String(7), nullable=False, default="#2C5F9E")
-    accent_color = Column(String(7), nullable=False, default="#4A90E2")
+    primary_color = Column(String(9), nullable=False, default="#162F65FF")
+    secondary_color = Column(String(9), nullable=False, default="#2C5F9EFF")
+    accent_color = Column(String(9), nullable=False, default="#4A90E2FF")
     updated_at = Column(
         DateTime,
         nullable=False,

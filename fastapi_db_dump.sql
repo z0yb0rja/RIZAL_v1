@@ -970,9 +970,9 @@ ALTER SEQUENCE public.school_audit_logs_id_seq OWNED BY public.school_audit_logs
 
 CREATE TABLE public.school_settings (
     school_id integer NOT NULL,
-    primary_color character varying(7) DEFAULT '#162F65FF'::character varying NOT NULL,
-    secondary_color character varying(7) DEFAULT '#2C5F9EFF'::character varying NOT NULL,
-    accent_color character varying(7) DEFAULT '#4A90E2FF'::character varying NOT NULL,
+    primary_color character varying(9) DEFAULT '#162F65FF'::character varying NOT NULL,
+    secondary_color character varying(9) DEFAULT '#2C5F9EFF'::character varying NOT NULL,
+    accent_color character varying(9) DEFAULT '#4A90E2FF'::character varying NOT NULL,
     updated_at timestamp without time zone DEFAULT now() NOT NULL,
     updated_by_user_id integer
 );
@@ -1048,8 +1048,8 @@ CREATE TABLE public.schools (
     updated_at timestamp without time zone DEFAULT now() NOT NULL,
     school_name character varying(255) NOT NULL,
     school_code character varying(50),
-    primary_color character varying(7) DEFAULT '#162F65FF'::character varying NOT NULL,
-    secondary_color character varying(7),
+    primary_color character varying(9) DEFAULT '#162F65FF'::character varying NOT NULL,
+    secondary_color character varying(9),
     subscription_status character varying(30) DEFAULT 'trial'::character varying NOT NULL,
     active_status boolean DEFAULT true NOT NULL
 );

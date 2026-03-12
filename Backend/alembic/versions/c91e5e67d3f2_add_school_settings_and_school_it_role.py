@@ -38,9 +38,9 @@ def upgrade() -> None:
         """
         CREATE TABLE IF NOT EXISTS school_settings (
             school_id INTEGER PRIMARY KEY REFERENCES schools(id) ON DELETE CASCADE,
-            primary_color VARCHAR(7) NOT NULL DEFAULT '#162F65',
-            secondary_color VARCHAR(7) NOT NULL DEFAULT '#2C5F9E',
-            accent_color VARCHAR(7) NOT NULL DEFAULT '#4A90E2',
+            primary_color VARCHAR(9) NOT NULL DEFAULT '#162F65FF',
+            secondary_color VARCHAR(9) NOT NULL DEFAULT '#2C5F9EFF',
+            accent_color VARCHAR(9) NOT NULL DEFAULT '#4A90E2FF',
             updated_at TIMESTAMP NOT NULL DEFAULT NOW(),
             updated_by_user_id INTEGER REFERENCES users(id) ON DELETE SET NULL
         )

@@ -24,9 +24,9 @@ def upgrade() -> None:
     op.add_column("schools", sa.Column("school_code", sa.String(length=50), nullable=True))
     op.add_column(
         "schools",
-        sa.Column("primary_color", sa.String(length=7), nullable=False, server_default="#162F65"),
+        sa.Column("primary_color", sa.String(length=9), nullable=False, server_default="#162F65FF"),
     )
-    op.add_column("schools", sa.Column("secondary_color", sa.String(length=7), nullable=True))
+    op.add_column("schools", sa.Column("secondary_color", sa.String(length=9), nullable=True))
     op.add_column(
         "schools",
         sa.Column("subscription_status", sa.String(length=30), nullable=False, server_default="trial"),
@@ -41,7 +41,7 @@ def upgrade() -> None:
         """
         UPDATE schools s
         SET
-            primary_color = COALESCE(ss.primary_color, s.primary_color, '#162F65'),
+            primary_color = COALESCE(ss.primary_color, s.primary_color, '#162F65FF'),
             secondary_color = COALESCE(ss.secondary_color, s.secondary_color)
         FROM school_settings ss
         WHERE ss.school_id = s.id

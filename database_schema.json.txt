@@ -5858,7 +5858,7 @@
                             "numeric_precision": null,
                             "datetime_precision": null,
                             "identity_generation": null,
-                            "character_maximum_length": 7
+                            "character_maximum_length": 9
                         },
                         {
                             "default": "'#2C5F9EFF'::character varying",
@@ -5873,7 +5873,7 @@
                             "numeric_precision": null,
                             "datetime_precision": null,
                             "identity_generation": null,
-                            "character_maximum_length": 7
+                            "character_maximum_length": 9
                         },
                         {
                             "default": "'#4A90E2FF'::character varying",
@@ -5888,7 +5888,7 @@
                             "numeric_precision": null,
                             "datetime_precision": null,
                             "identity_generation": null,
-                            "character_maximum_length": 7
+                            "character_maximum_length": 9
                         },
                         {
                             "default": "now()",
@@ -6620,7 +6620,7 @@
                             "numeric_precision": null,
                             "datetime_precision": null,
                             "identity_generation": null,
-                            "character_maximum_length": 7
+                            "character_maximum_length": 9
                         },
                         {
                             "default": null,
@@ -6635,7 +6635,7 @@
                             "numeric_precision": null,
                             "datetime_precision": null,
                             "identity_generation": null,
-                            "character_maximum_length": 7
+                            "character_maximum_length": 9
                         },
                         {
                             "default": "'trial'::character varying",

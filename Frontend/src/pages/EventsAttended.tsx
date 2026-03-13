@@ -164,7 +164,7 @@ export const EventsAttended: React.FC<EventsAttendedProps> = ({ role }) => {
 
       <style>{`
         .events-attended {
-          font-family: Arial, sans-serif;
+          font-family: var(--font-sans);
           max-width: 1200px;
           margin: 0 auto;
           padding: 20px;
@@ -181,12 +181,12 @@ export const EventsAttended: React.FC<EventsAttendedProps> = ({ role }) => {
         .header h2 {
           margin: 0;
           font-size: 24px;
-          color: var(--primary-color, #162F65);
+          color: var(--primary-color, #162F65ff);
         }
 
         .header p {
           margin: 5px 0 0;
-          color: var(--secondary-color, #2C5F9E);
+          color: var(--secondary-color, #2C5F9Eff);
         }
 
         .search-box {
@@ -200,13 +200,13 @@ export const EventsAttended: React.FC<EventsAttendedProps> = ({ role }) => {
           left: 10px;
           top: 50%;
           transform: translateY(-50%);
-          color: var(--secondary-color, #2C5F9E);
+          color: var(--secondary-color, #2C5F9Eff);
         }
 
         .search-box input {
           width: 100%;
           padding: 10px 15px 10px 35px;
-          border: 1px solid #ddd;
+          border: 1px solid #ddddddff;
           border-radius: 4px;
           font-size: 16px;
         }
@@ -225,16 +225,16 @@ export const EventsAttended: React.FC<EventsAttendedProps> = ({ role }) => {
         td {
           padding: 12px 15px;
           text-align: left;
-          border-bottom: 1px solid #eee;
+          border-bottom: 1px solid #eeeeeeff;
         }
 
         th {
-          background-color: #f8f9fa;
+          background-color: #f8f9faff;
           font-weight: 600;
         }
 
         tr:hover {
-          background-color: #f5f5f5;
+          background-color: #f5f5f5ff;
         }
 
         .status {
@@ -244,25 +244,25 @@ export const EventsAttended: React.FC<EventsAttendedProps> = ({ role }) => {
         }
 
         .status.present {
-          background-color: #eef6ff;
-          color: var(--primary-color, #162F65);
+          background-color: #eef6ffff;
+          color: var(--primary-color, #162F65ff);
         }
 
         .status.absent {
-          background-color: #ffebee;
-          color: #c62828;
+          background-color: #ffebeeff;
+          color: #c62828ff;
         }
 
         .status.excused {
-          background-color: #f0f8ff;
-          color: var(--secondary-color, #2C5F9E);
+          background-color: #f0f8ffff;
+          color: var(--secondary-color, #2C5F9Eff);
         }
 
         .loading,
         .no-results {
           text-align: center;
           padding: 20px;
-          color: #666;
+          color: #666666ff;
         }
 
         @media (max-width: 768px) {
@@ -278,3 +278,5 @@ export const EventsAttended: React.FC<EventsAttendedProps> = ({ role }) => {
 };
 
 export default EventsAttended;
+
+

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaFileImport, FaKey, FaPalette, FaRegListAlt, FaSchool, FaSitemap, FaUsers } from "react-icons/fa";
+import { FaFileImport, FaKey, FaPalette, FaRegListAlt, FaSchool, FaSitemap, FaUserShield, FaUsers } from "react-icons/fa";
 
 import NavbarSchoolIT from "../components/NavbarSchoolIT";
 import { fetchSchoolSettings, normalizeLogoUrl, SchoolSettings } from "../api/schoolSettingsApi";
@@ -23,7 +23,7 @@ const SchoolITDashboard = () => {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f5f7faff)" }}>
       <NavbarSchoolIT />
 
       <main className="container py-4">
@@ -44,7 +44,7 @@ const SchoolITDashboard = () => {
                     height: 64,
                     borderRadius: "50%",
                     objectFit: "cover",
-                    border: "2px solid #e9ecef",
+                    border: "2px solid var(--border-subtle)",
                   }}
                 />
               ) : (
@@ -53,10 +53,10 @@ const SchoolITDashboard = () => {
                     width: 64,
                     height: 64,
                     borderRadius: "50%",
-                    background: "#e9ecef",
+                    background: "var(--surface-4)",
                     display: "grid",
                     placeItems: "center",
-                    color: "#6c757d",
+                    color: "var(--text-muted)",
                   }}
                 >
                   <FaSchool />
@@ -174,6 +174,22 @@ const SchoolITDashboard = () => {
               </div>
             </Link>
           </div>
+
+          <div className="col-md-6">
+            <Link to="/ssg_portal" className="text-decoration-none">
+              <div className="card h-100 border-0 shadow-sm">
+                <div className="card-body">
+                  <h5 className="card-title">
+                    <FaUserShield className="me-2" />
+                    SSG Portal
+                  </h5>
+                  <p className="card-text text-muted mb-0">
+                    Create SSG role slots, assign students, and manage permissions.
+                  </p>
+                </div>
+              </div>
+            </Link>
+          </div>
         </section>
       </main>
     </div>
@@ -181,3 +197,6 @@ const SchoolITDashboard = () => {
 };
 
 export default SchoolITDashboard;
+
+
+

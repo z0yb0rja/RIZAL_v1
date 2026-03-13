@@ -7,6 +7,8 @@ import {
   FaBars,
   FaTimes,
   FaThList,
+  FaBullhorn,
+  FaRegCalendarAlt,
 } from "react-icons/fa";
 import logoValid8 from "../assets/images/logo-valid83_transparent.png";
 import userprofile from "../assets/images/userprofile.png";
@@ -105,6 +107,32 @@ export const NavbarStudent = () => {
             </li>
             <li>
               <NavLink
+                to="/student_announcements"
+                className={({ isActive }) =>
+                  isActive ? "student-nav-link active" : "student-nav-link"
+                }
+                onClick={() => setSidebarOpen(false)}
+                title="Announcements"
+              >
+                <FaBullhorn className="nav-icon" />
+                <span className="nav-text">Announcements</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                to="/student_ssg_events"
+                className={({ isActive }) =>
+                  isActive ? "student-nav-link active" : "student-nav-link"
+                }
+                onClick={() => setSidebarOpen(false)}
+                title="SSG Events"
+              >
+                <FaRegCalendarAlt className="nav-icon" />
+                <span className="nav-text">SSG Events</span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 to="/student_events_attended"
                 className={({ isActive }) =>
                   isActive ? "student-nav-link active" : "student-nav-link"
@@ -150,3 +178,5 @@ export const NavbarStudent = () => {
 };
 
 export default NavbarStudent;
+
+

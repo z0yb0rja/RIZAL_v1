@@ -60,7 +60,7 @@ const AuditLogs = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8f9fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f8f9faff)" }}>
       <NavbarComponent />
       <main className="container py-4">
         <h2 className="mb-3">Audit Logs</h2>
@@ -140,3 +140,6 @@ const AuditLogs = () => {
 };
 
 export default AuditLogs;
+
+
+

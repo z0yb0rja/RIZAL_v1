@@ -35,3 +35,5 @@ const Map: React.FC<MapProps> = ({ center, zoom = 15, className = "" }) => {
 };
 
 export default Map;
+
+

@@ -28,6 +28,15 @@ const SchoolImportUsers = () => {
   const [jobId, setJobId] = useState<string | null>(null);
   const pollRef = useRef<number | null>(null);
 
+  const showOverlay = loading || previewing || retrying;
+  const overlayTitle = previewing
+    ? "Previewing file..."
+    : retrying
+    ? "Retrying failed rows..."
+    : "Import in progress...";
+  const progressPercent =
+    summary && summary.total_rows > 0 ? summary.percentage_completed : 0;
+
   useEffect(() => {
     return () => {
       if (pollRef.current) {
@@ -74,6 +83,7 @@ const SchoolImportUsers = () => {
   };
 
   const handleImport = async () => {
+    if (loading) return;
     if (!selectedFile) {
       setError("Please select an Excel (.xlsx) file first.");
       return;
@@ -102,6 +112,7 @@ const SchoolImportUsers = () => {
   };
 
   const handlePreview = async () => {
+    if (previewing || loading) return;
     if (!selectedFile) {
       setError("Please select an Excel (.xlsx) file first.");
       return;
@@ -138,6 +149,7 @@ const SchoolImportUsers = () => {
 
   const handleRetryFailedRows = async () => {
     if (!jobId) return;
+    if (retrying || loading) return;
     setRetrying(true);
     setError(null);
     try {
@@ -154,7 +166,56 @@ const SchoolImportUsers = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f5f7faff)" }}>
+      {showOverlay && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            background: "rgba(10, 20, 35, 0.55)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 1050,
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          <div
+            className="card shadow-lg border-0"
+            style={{
+              width: "min(520px, 92vw)",
+              background: "var(--card-background, #ffffff)",
+              color: "var(--text-color, #0f172a)",
+            }}
+          >
+            <div className="card-body text-center">
+              <div className="spinner-border text-primary mb-3" role="status" />
+              <h5 className="mb-2">{overlayTitle}</h5>
+              <p className="text-muted mb-3">
+                {summary
+                  ? `Processed ${summary.processed_rows} of ${summary.total_rows} rows.`
+                  : "Please keep this tab open while we process the file."}
+              </p>
+              <div className="progress mb-2" style={{ height: "8px" }}>
+                <div
+                  className="progress-bar"
+                  role="progressbar"
+                  style={{
+                    width: `${progressPercent}%`,
+                    backgroundColor: "var(--primary-color, #162F65ff)",
+                  }}
+                  aria-valuenow={progressPercent}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                />
+              </div>
+              <small className="text-muted">
+                {summary ? `${progressPercent.toFixed(1)}% complete` : "Initializing..."}
+              </small>
+            </div>
+          </div>
+        </div>
+      )}
       <NavbarSchoolIT />
 
       <main className="container py-4">
@@ -200,10 +261,10 @@ const SchoolImportUsers = () => {
               <button
                 className="btn btn-primary"
                 onClick={handleImport}
-                disabled={loading}
+                disabled={loading || previewing || retrying}
                 style={{
-                  backgroundColor: "var(--primary-color, #162F65)",
-                  borderColor: "var(--primary-color, #162F65)",
+                  backgroundColor: "var(--primary-color, #162F65ff)",
+                  borderColor: "var(--primary-color, #162F65ff)",
                 }}
               >
                 <FaUpload className="me-2" />
@@ -257,6 +318,16 @@ const SchoolImportUsers = () => {
                   <br />
                   <strong>Result:</strong> {summary.success_count} success, {summary.failed_count} failed
                 </div>
+                {summary.state === "completed" && summary.failed_count === 0 && (
+                  <div className="alert alert-success" role="alert">
+                    All user accounts were created successfully.
+                  </div>
+                )}
+                {summary.state === "completed" && summary.failed_count > 0 && (
+                  <div className="alert alert-warning" role="alert">
+                    Import completed with some failures. Download the failed rows or retry them.
+                  </div>
+                )}
 
                 {summary.failed_count > 0 && (
                   <div className="d-flex justify-content-between align-items-center mb-2">
@@ -310,3 +381,6 @@ const SchoolImportUsers = () => {
 };
 
 export default SchoolImportUsers;
+
+
+

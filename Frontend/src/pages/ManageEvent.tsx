@@ -895,3 +895,5 @@ export const ManageEvent: React.FC<ManageEventProps> = ({ role }) => {
 };
 
 export default ManageEvent;
+
+

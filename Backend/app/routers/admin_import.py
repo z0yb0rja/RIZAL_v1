@@ -4,6 +4,7 @@ import io
 import json
 import os
 import uuid
+from datetime import datetime, timedelta
 from pathlib import Path
 from zipfile import BadZipFile
 
@@ -157,11 +158,19 @@ def _queue_import_job_from_file_bytes(
     retried_from_job_id: str | None = None,
 ) -> ImportJobCreateResponse:
     repo = ImportRepository(db)
-    recent_job_count = repo.count_recent_jobs(
+    recent_job_count, oldest_created_at = repo.get_recent_job_stats(
         created_by_user_id=current_user.id,
         window_seconds=settings.import_rate_limit_window_seconds,
+        statuses=["pending", "processing"],
     )
     if recent_job_count >= settings.import_rate_limit_count:
+        retry_after_seconds = settings.import_rate_limit_window_seconds
+        if oldest_created_at is not None:
+            retry_after_seconds = int(
+                (oldest_created_at + timedelta(seconds=settings.import_rate_limit_window_seconds) - datetime.utcnow())
+                .total_seconds()
+            )
+            retry_after_seconds = max(1, retry_after_seconds)
         _append_import_audit_log(
             db,
             current_user=current_user,
@@ -170,12 +179,14 @@ def _queue_import_job_from_file_bytes(
                 "reason": "rate limit exceeded",
                 "filename": filename,
                 "window_seconds": settings.import_rate_limit_window_seconds,
+                "retry_after_seconds": retry_after_seconds,
             },
         )
         db.commit()
         raise HTTPException(
             status_code=status.HTTP_429_TOO_MANY_REQUESTS,
             detail="Too many import requests. Please wait before uploading again.",
+            headers={"Retry-After": str(retry_after_seconds)},
         )
 
     job_id = str(uuid.uuid4())
@@ -230,6 +241,7 @@ def _build_validation_context(db: Session, target_school_id: int) -> ValidationC
         target_school_id=target_school_id,
         department_lookup=department_lookup,
         course_lookup=course_lookup,
+        allow_auto_create=True,
     )
 
 

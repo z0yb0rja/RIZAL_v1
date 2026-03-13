@@ -105,3 +105,5 @@ export const fetchEventsAttended = async (): Promise<Event[]> => {
 
   return Array.from(latestByEvent.values());
 };
+
+

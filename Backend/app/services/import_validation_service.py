@@ -28,6 +28,7 @@ class ValidationContext:
     target_school_id: int
     department_lookup: Dict[str, int]
     course_lookup: Dict[str, int]
+    allow_auto_create: bool = False
     seen_emails: set[str] = field(default_factory=set)
     seen_school_student: set[Tuple[int, str]] = field(default_factory=set)
     seen_rows: set[Tuple[str, ...]] = field(default_factory=set)
@@ -118,15 +119,17 @@ def validate_and_transform_row(
         else:
             context.seen_emails.add(email)
 
-    department_key = row_data["Department"].strip().lower()
-    course_key = row_data["Course"].strip().lower()
+    department_name = row_data["Department"].strip()
+    course_name = row_data["Course"].strip()
+    department_key = department_name.lower()
+    course_key = course_name.lower()
 
     department_id = context.department_lookup.get(department_key)
-    if department_id is None and row_data["Department"]:
+    if department_id is None and department_name and not context.allow_auto_create:
         errors.append("Department does not exist")
 
     course_id = context.course_lookup.get(course_key)
-    if course_id is None and row_data["Course"]:
+    if course_id is None and course_name and not context.allow_auto_create:
         errors.append("Course does not exist")
 
     if errors:
@@ -142,6 +145,8 @@ def validate_and_transform_row(
         "middle_name": row_data["Middle Name"],
         "department_id": department_id,
         "program_id": course_id,
+        "department_name": department_name,
+        "program_name": course_name,
     }
     return transformed, [], row_data
 

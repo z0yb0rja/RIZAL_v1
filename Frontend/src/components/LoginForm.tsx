@@ -67,8 +67,8 @@ const LoginForm = () => {
         school_name: userData.schoolName || "School",
         school_code: userData.schoolCode || null,
         logo_url: normalizeLogoUrl(userData.logoUrl),
-        primary_color: userData.primaryColor || "#162F65",
-        secondary_color: userData.secondaryColor || "#2C5F9E",
+        primary_color: userData.primaryColor || "#162F65ff",
+        secondary_color: userData.secondaryColor || "#2C5F9Eff",
         subscription_status: "trial",
         active_status: true,
       });
@@ -296,3 +296,5 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+
+

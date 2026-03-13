@@ -64,7 +64,7 @@ const SchoolPasswordResetRequests = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f5f7faff)" }}>
       <NavbarSchoolIT />
 
       <main className="container py-4">
@@ -150,3 +150,6 @@ const SchoolPasswordResetRequests = () => {
 };
 
 export default SchoolPasswordResetRequests;
+
+
+

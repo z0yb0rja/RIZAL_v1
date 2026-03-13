@@ -459,7 +459,7 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
           max-width: 1200px;
           margin: 0 auto;
           padding: 20px;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+          font-family: var(--font-sans);
         }
 
         .attendance-header {
@@ -468,14 +468,14 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
         }
 
         .attendance-header h1 {
-          color: var(--primary-color, #162F65);
+          color: var(--primary-color, #162F65ff);
           margin-bottom: 10px;
           font-size: 2.5rem;
           font-weight: 600;
         }
 
         .attendance-header p {
-          color: var(--secondary-color, #2C5F9E);
+          color: var(--secondary-color, #2C5F9Eff);
           font-size: 1.1rem;
         }
 
@@ -487,15 +487,15 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
         }
 
         .message.success {
-          background-color: #d4edda;
-          border: 1px solid #c3e6cb;
-          color: #155724;
+          background-color: #d4eddaff;
+          border: 1px solid #c3e6cbff;
+          color: #155724ff;
         }
 
         .message.error {
-          background-color: #f8d7da;
-          border: 1px solid #f5c6cb;
-          color: #721c24;
+          background-color: #f8d7daff;
+          border: 1px solid #f5c6cbff;
+          color: #721c24ff;
         }
 
         .attendance-content {
@@ -511,23 +511,23 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
         }
 
         .attendance-card {
-          background: white;
+          background: var(--surface-2);
           border-radius: 12px;
-          box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--shadow-sm);
           padding: 25px;
-          border: 1px solid #e1e5e9;
+          border: 1px solid var(--border-subtle);
         }
 
         .attendance-card h2 {
           margin-top: 0;
           margin-bottom: 20px;
-          color: var(--primary-color, #162F65);
+          color: var(--primary-color, #162F65ff);
           font-size: 1.5rem;
           font-weight: 600;
         }
 
         .card-subtitle {
-          color: #666;
+          color: #666666ff;
           margin-bottom: 20px;
           font-size: 0.9rem;
         }
@@ -557,13 +557,13 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
 
         /* NEW: Event info section */
         .event-info {
-          background-color: #f8f9fa;
+          background-color: #f8f9faff;
           padding: 10px 15px;
           border-radius: 6px;
           margin-bottom: 15px;
           font-size: 0.9rem;
-          color: #495057;
-          border-left: 4px solid var(--primary-color, #162F65);
+          color: #495057ff;
+          border-left: 4px solid var(--primary-color, #162F65ff);
         }
 
         .attendance-form {
@@ -580,13 +580,13 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
         .form-group label {
           margin-bottom: 6px;
           font-weight: 500;
-          color: var(--primary-color, #162F65);
+          color: var(--primary-color, #162F65ff);
           font-size: 0.9rem;
         }
 
         .form-control {
           padding: 12px;
-          border: 2px solid #e1e5e9;
+          border: 2px solid #e1e5e9ff;
           border-radius: 8px;
           font-size: 16px;
           transition: border-color 0.2s;
@@ -594,7 +594,7 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
 
         .form-control:focus {
           outline: none;
-          border-color: var(--primary-color, #162F65);
+          border-color: var(--primary-color, #162F65ff);
           box-shadow: 0 0 0 3px rgba(22, 47, 101, 0.1);
         }
 
@@ -615,40 +615,40 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
         }
 
         .btn-primary {
-          background-color: var(--primary-color, #162F65);
+          background-color: var(--primary-color, #162F65ff);
           color: white;
         }
 
         .btn-primary:hover:not(:disabled) {
-          background-color: var(--secondary-color, #2C5F9E);
+          background-color: var(--secondary-color, #2C5F9Eff);
           transform: translateY(-1px);
         }
 
         .btn-secondary {
-          background-color: #6c757d;
+          background-color: #6c757dff;
           color: white;
         }
 
         .btn-secondary:hover:not(:disabled) {
-          background-color: #545b62;
+          background-color: #545b62ff;
           transform: translateY(-1px);
         }
 
         /* NEW: Warning button style */
         .btn-warning {
-          background-color: #ffc107;
-          color: #212529;
+          background-color: #ffc107ff;
+          color: #212529ff;
         }
 
         .btn-warning:hover:not(:disabled) {
-          background-color: #e0a800;
+          background-color: #e0a800ff;
           transform: translateY(-1px);
         }
 
         .empty-state {
           text-align: center;
           padding: 40px 20px;
-          color: #666;
+          color: #666666ff;
         }
 
         .attendance-list {
@@ -662,9 +662,9 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
           justify-content: space-between;
           align-items: center;
           padding: 15px;
-          background-color: #f8f9fa;
+          background-color: #f8f9faff;
           border-radius: 8px;
-          border: 1px solid #e1e5e9;
+          border: 1px solid #e1e5e9ff;
         }
 
         .attendance-info {
@@ -679,17 +679,17 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
 
         .student-id {
           font-weight: 600;
-          color: var(--primary-color, #162F65);
+          color: var(--primary-color, #162F65ff);
           font-size: 1rem;
         }
 
         .time-in {
-          color: #666;
+          color: #666666ff;
           font-size: 0.9rem;
         }
 
         .notes {
-          color: #666;
+          color: #666666ff;
           font-size: 0.85rem;
           font-style: italic;
         }
@@ -722,3 +722,5 @@ export const ManualAttendance: React.FC<ManualAttendanceProps> = ({ role }) => {
     </div>
   );
 };
+
+

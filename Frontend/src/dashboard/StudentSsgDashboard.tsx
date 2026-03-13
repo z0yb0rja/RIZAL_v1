@@ -16,31 +16,31 @@ export const StudentSsgDashboard = () => {
     {
       title: "Upcoming Events",
       description: "Stay informed about upcoming school events.",
-      icon: <FaCalendarAlt style={{ color: "#007bff" }} />,
+      icon: <FaCalendarAlt style={{ color: "#007bffff" }} />,
       link: "/studentssg_upcoming_events",
     },
     {
       title: "Events Attended",
       description: "Check and review the events you've attended.",
-      icon: <FaCheckCircle style={{ color: "#28a745" }} />,
+      icon: <FaCheckCircle style={{ color: "#28a745ff" }} />,
       link: "/studentssg_events_attended",
     },
     {
       title: "Events",
       description: "View and manage currently ongoing events.",
-      icon: <FaClipboardList style={{ color: "#ffc107" }} />,
+      icon: <FaClipboardList style={{ color: "#ffc107ff" }} />,
       link: "/studentssg_events",
     },
     {
       title: "Records",
       description: "Access records and event history.",
-      icon: <FaChartBar style={{ color: "#6c757d" }} />,
+      icon: <FaChartBar style={{ color: "#6c757dff" }} />,
       link: "/studentssg_records",
     },
     {
       title: "Manual Attendance",
       description: "Record Attendance",
-      icon: <FaPlus style={{ color: "#17a2b8" }} />, // Teal color
+      icon: <FaPlus style={{ color: "#17a2b8ff" }} />, // Teal color
       link: "/studentssg_manual_attendance",
     },
   ];
@@ -54,14 +54,14 @@ export const StudentSsgDashboard = () => {
 
       <main
         className="flex-grow-1"
-        style={{ padding: "2rem 1rem 2rem 3rem", backgroundColor: "#f5f7fa" }}
+        style={{ padding: "2rem 1rem 2rem 3rem", backgroundColor: "var(--page-background)" }}
       >
         {/* Welcoming Description */}
         <div
           className="welcome-section text-center mb-5"
           style={{ marginRight: "2rem" }}
         >
-          <h2 className="mb-3" style={{ color: "#343a40", fontWeight: "600" }}>
+          <h2 className="mb-3" style={{ color: "var(--text-color)", fontWeight: "600" }}>
             Welcome Student ssg!
           </h2>
           <p
@@ -89,7 +89,7 @@ export const StudentSsgDashboard = () => {
                       </div>
                       <h5
                         className="card-title mb-2"
-                        style={{ color: "#343a40" }}
+                        style={{ color: "var(--text-color)" }}
                       >
                         {card.title}
                       </h5>
@@ -111,8 +111,8 @@ export const StudentSsgDashboard = () => {
       <footer
         className="mt-auto py-3"
         style={{
-          backgroundColor: "#f8f9fa",
-          borderTop: "1px solid #dee2e6",
+          backgroundColor: "var(--surface-3)",
+          borderTop: "1px solid var(--border-subtle)",
           paddingRight: "0rem",
           paddingLeft: "1rem",
         }} // Added paddingRight
@@ -132,7 +132,7 @@ export const StudentSsgDashboard = () => {
         }
         .hover-effect:hover {
           transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--shadow-md);
         }
         .icon-wrapper {
           transition: transform 0.3s ease;
@@ -152,3 +152,6 @@ export const StudentSsgDashboard = () => {
 };
 
 export default StudentSsgDashboard;
+
+
+

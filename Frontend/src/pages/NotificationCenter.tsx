@@ -86,7 +86,7 @@ const NotificationCenter = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8f9fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f8f9faff)" }}>
       <NavbarComponent />
       <main className="container py-4">
         <h2 className="mb-3">Notification Center</h2>
@@ -240,3 +240,6 @@ const NotificationCenter = () => {
 };
 
 export default NotificationCenter;
+
+
+

@@ -1,0 +1,71 @@
+.schoolit-menu-btn {
+  border: none;
+  background: transparent;
+  color: var(--sidebar-text);
+  font-size: 1.25rem;
+}
+
+.schoolit-overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--overlay-bg);
+  z-index: 1030;
+}
+
+.schoolit-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 260px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border-right: 1px solid var(--sidebar-border);
+  transform: translateX(-100%);
+  transition: transform 0.2s ease;
+  z-index: 1040;
+  overflow-y: auto;
+}
+
+.schoolit-sidebar.open {
+  transform: translateX(0);
+}
+
+.schoolit-sidebar-header {
+  padding: 1rem;
+  border-bottom: 1px solid var(--sidebar-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.schoolit-sidebar-header .btn {
+  border-color: rgba(255, 255, 255, 0.4);
+  color: var(--sidebar-text);
+}
+
+.schoolit-sidebar-nav {
+  padding: 1rem;
+}
+
+.schoolit-sidebar-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--sidebar-text);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+}
+
+.schoolit-sidebar-nav .nav-link.active {
+  background: var(--sidebar-active);
+  color: var(--sidebar-text);
+  font-weight: 600;
+}
+
+.schoolit-sidebar-nav .nav-link:hover {
+  background: var(--sidebar-hover);
+  color: var(--sidebar-text);
+}
+
+

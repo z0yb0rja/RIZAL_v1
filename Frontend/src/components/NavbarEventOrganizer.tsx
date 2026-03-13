@@ -149,3 +149,5 @@ export const NavbarEventOrganizer = () => {
 };
 
 export default NavbarEventOrganizer;
+
+

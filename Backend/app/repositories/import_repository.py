@@ -102,17 +102,25 @@ class ImportRepository:
             .all()
         )
 
-    def count_recent_jobs(self, created_by_user_id: int, window_seconds: int) -> int:
+    def get_recent_job_stats(
+        self,
+        *,
+        created_by_user_id: int,
+        window_seconds: int,
+        statuses: Iterable[str] | None = None,
+    ) -> tuple[int, datetime | None]:
         cutoff = datetime.utcnow() - timedelta(seconds=window_seconds)
-        return (
-            self.db.query(func.count(BulkImportJob.id))
-            .filter(
-                BulkImportJob.created_by_user_id == created_by_user_id,
-                BulkImportJob.created_at >= cutoff,
-            )
-            .scalar()
-            or 0
+        query = self.db.query(
+            func.count(BulkImportJob.id),
+            func.min(BulkImportJob.created_at),
+        ).filter(
+            BulkImportJob.created_by_user_id == created_by_user_id,
+            BulkImportJob.created_at >= cutoff,
         )
+        if statuses:
+            query = query.filter(BulkImportJob.status.in_(list(statuses)))
+        count_value, oldest_created_at = query.first() or (0, None)
+        return int(count_value or 0), oldest_created_at
 
     def get_student_role_id(self) -> int:
         role = self.db.query(Role).filter(Role.name == "student").first()

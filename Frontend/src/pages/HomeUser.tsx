@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavbarStudent } from "../components/NavbarStudent";
 import { NavbarStudentSSG } from "../components/NavbarStudentSSG";
@@ -6,6 +6,7 @@ import { NavbarEventOrganizer } from "../components/NavbarEventOrganizer";
 import { NavbarStudentSSGEventOrganizer } from "../components/NavbarStudentSSGEventOrganizer";
 import { NavbarSSG } from "../components/NavbarSSG";
 import NavbarAdmin from "../components/NavbarAdmin";
+import { defaultSchoolYear, fetchSsgPermissions } from "../api/ssgApi";
 
 // Import colorful icons
 import {
@@ -17,6 +18,9 @@ import {
   FaCogs,
   FaChartBar,
   FaSchool,
+  FaBullhorn,
+  FaRegCalendarAlt,
+  FaCheckDouble,
 } from "react-icons/fa";
 
 interface HomeUserProps {
@@ -31,39 +35,92 @@ interface DashboardCard {
 }
 
 export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
+  const [ssgPermissions, setSsgPermissions] = useState<string[]>([]);
+  const isStudentRole = role.startsWith("student");
+
+  useEffect(() => {
+    if (!isStudentRole) return;
+    fetchSsgPermissions(defaultSchoolYear())
+      .then((permissions) => setSsgPermissions(permissions))
+      .catch(() => setSsgPermissions([]));
+  }, [isStudentRole]);
+
+  const permissionCards = useMemo(() => {
+    if (!isStudentRole || ssgPermissions.length === 0) return [];
+    const cards: DashboardCard[] = [];
+    if (ssgPermissions.includes("post_announcement")) {
+      cards.push({
+        title: "Post Announcement",
+        description: "Create school-wide SSG announcements.",
+        icon: <FaBullhorn style={{ color: "#dc3545ff" }} />,
+        link: "/ssg_portal#ssg-announcements",
+      });
+    }
+    if (ssgPermissions.includes("create_event")) {
+      cards.push({
+        title: "Create Event",
+        description: "Submit an SSG event for approval.",
+        icon: <FaPlus style={{ color: "#007bffff" }} />,
+        link: "/ssg_portal#ssg-events",
+      });
+    }
+    if (ssgPermissions.includes("approve_event")) {
+      cards.push({
+        title: "Approve Events",
+        description: "Review and approve pending SSG events.",
+        icon: <FaCheckDouble style={{ color: "#28a745ff" }} />,
+        link: "/ssg_portal#ssg-events",
+      });
+    }
+    return cards;
+  }, [isStudentRole, ssgPermissions]);
+
   // Define card data with colorful icons
+  const studentBaseCards: DashboardCard[] = [
+    {
+      title: "Announcements",
+      description: "Read the latest school-wide SSG announcements.",
+      icon: <FaBullhorn style={{ color: "#dc3545ff" }} />,
+      link: "/student_announcements",
+    },
+    {
+      title: "SSG Events",
+      description: "View approved SSG events for your school.",
+      icon: <FaRegCalendarAlt style={{ color: "#17a2b8ff" }} />,
+      link: "/student_ssg_events",
+    },
+    {
+      title: "Upcoming Events",
+      description: "Stay informed about upcoming school events.",
+      icon: <FaCalendarAlt style={{ color: "#007bffff" }} />,
+      link: "/student_upcoming_events",
+    },
+    {
+      title: "Events Attended",
+      description: "Check and review the events you've attended.",
+      icon: <FaCheckCircle style={{ color: "#28a745ff" }} />,
+      link: "/student_events_attended",
+    },
+  ];
   const cardData: Record<string, DashboardCard[]> = {
-    student: [
-      {
-        title: "Upcoming Events",
-        description: "Stay informed about upcoming school events.",
-        icon: <FaCalendarAlt style={{ color: "#007bff" }} />, // Blue color
-        link: "/student_upcoming_events",
-      },
-      {
-        title: "Events Attended",
-        description: "Check and review the events you've attended.",
-        icon: <FaCheckCircle style={{ color: "#28a745" }} />, // Green color
-        link: "/student_events_attended",
-      },
-    ],
+    student: studentBaseCards,
     ssg: [
       {
         title: "Events",
         description: "View and manage currently ongoing events.",
-        icon: <FaClipboardList style={{ color: "#ffc107" }} />, // Yellow color
+        icon: <FaClipboardList style={{ color: "#ffc107ff" }} />, // Yellow color
         link: "/ssg_events",
       },
       {
         title: "Records",
         description: "Access records and event history.",
-        icon: <FaChartBar style={{ color: "#6c757d" }} />, // Gray color
+        icon: <FaChartBar style={{ color: "#6c757dff" }} />, // Gray color
         link: "/ssg_records",
       },
       {
         title: "Manual Attendance",
         description: "Records Attendance.",
-        icon: <FaUsers style={{ color: "#6c757d" }} />, // Gray color
+        icon: <FaUsers style={{ color: "#6c757dff" }} />, // Gray color
         link: "/ssg_manual_attendance",
       },
     ],
@@ -71,13 +128,13 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
       {
         title: "Create Event",
         description: "Plan and schedule new events.",
-        icon: <FaPlus style={{ color: "#007bff" }} />, // Blue color
+        icon: <FaPlus style={{ color: "#007bffff" }} />, // Blue color
         link: "/event_organizer_create_event",
       },
       {
         title: "Manage Events",
         description: "Modify, update, or remove existing events.",
-        icon: <FaCogs style={{ color: "#6f42c1" }} />, // Purple color
+        icon: <FaCogs style={{ color: "#6f42c1ff" }} />, // Purple color
         link: "/event_organizer_manage_event",
       },
     ],
@@ -85,90 +142,117 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
       {
         title: "Manage Schools & SCHOOL_IT",
         description: "Create schools and manage SCHOOL_IT accounts.",
-        icon: <FaSchool style={{ color: "#dc3545" }} />, // Red color
+        icon: <FaSchool style={{ color: "#dc3545ff" }} />, // Red color
         link: "/admin_manage_users",
       },
     ],
     "student-ssg": [
       {
+        title: "Announcements",
+        description: "Read the latest school-wide SSG announcements.",
+        icon: <FaBullhorn style={{ color: "#dc3545ff" }} />,
+        link: "/student_announcements",
+      },
+      {
+        title: "SSG Events",
+        description: "View approved SSG events for your school.",
+        icon: <FaRegCalendarAlt style={{ color: "#17a2b8ff" }} />,
+        link: "/student_ssg_events",
+      },
+      {
         title: "Upcoming Events",
         description: "Stay informed about upcoming school events.",
-        icon: <FaCalendarAlt style={{ color: "#007bff" }} />,
+        icon: <FaCalendarAlt style={{ color: "#007bffff" }} />,
         link: "/studentssg_upcoming_events",
       },
       {
         title: "Events Attended",
         description: "Check and review the events you've attended.",
-        icon: <FaCheckCircle style={{ color: "#28a745" }} />, // Green color
+        icon: <FaCheckCircle style={{ color: "#28a745ff" }} />, // Green color
         link: "/studentssg_events_attended",
       },
       {
         title: "Events",
         description: "View and manage currently ongoing events.",
-        icon: <FaClipboardList style={{ color: "#ffc107" }} />,
+        icon: <FaClipboardList style={{ color: "#ffc107ff" }} />,
         link: "/studentssg_events",
       },
       {
         title: "Manual Attendance",
         description: "Record Attendance",
-        icon: <FaUsers style={{ color: "#17a2b8" }} />, // Teal color
+        icon: <FaUsers style={{ color: "#17a2b8ff" }} />, // Teal color
         link: "/studentssg_manual_attendance",
       },
       {
         title: "Records",
         description: "Access records and event history.",
-        icon: <FaChartBar style={{ color: "#6c757d" }} />, // Gray color
+        icon: <FaChartBar style={{ color: "#6c757dff" }} />, // Gray color
         link: "/studentssg_records",
       },
     ],
     "student-ssg-eventorganizer": [
       {
+        title: "Announcements",
+        description: "Read the latest school-wide SSG announcements.",
+        icon: <FaBullhorn style={{ color: "#dc3545ff" }} />,
+        link: "/student_announcements",
+      },
+      {
+        title: "SSG Events",
+        description: "View approved SSG events for your school.",
+        icon: <FaRegCalendarAlt style={{ color: "#17a2b8ff" }} />,
+        link: "/student_ssg_events",
+      },
+      {
         title: "Upcoming Events",
         description: "Stay informed about upcoming school events.",
-        icon: <FaCalendarAlt style={{ color: "#007bff" }} />,
+        icon: <FaCalendarAlt style={{ color: "#007bffff" }} />,
         link: "/student_ssg_eventorganizer_upcoming_events",
       },
       {
         title: "Events Attended",
         description: "Check and review the events you've attended.",
-        icon: <FaCheckCircle style={{ color: "#28a745" }} />, // Green color
+        icon: <FaCheckCircle style={{ color: "#28a745ff" }} />, // Green color
         link: "/student_ssg_eventorganizer_events_attended",
       },
       {
         title: "Events",
         description: "View and manage currently ongoing events.",
-        icon: <FaClipboardList style={{ color: "#ffc107" }} />,
+        icon: <FaClipboardList style={{ color: "#ffc107ff" }} />,
         link: "/student_ssg_eventorganizer_events",
       },
       {
         title: "Manual Attendance",
         description: "Record Attendance.",
-        icon: <FaPlus style={{ color: "#17a2b8" }} />, // Teal color
+        icon: <FaPlus style={{ color: "#17a2b8ff" }} />, // Teal color
         link: "/student_ssg_eventorganizer_manual_attendance",
       },
       {
         title: "Records",
         description: "Access records and event history.",
-        icon: <FaChartBar style={{ color: "#6c757d" }} />, // Gray color
+        icon: <FaChartBar style={{ color: "#6c757dff" }} />, // Gray color
         link: "/student_ssg_eventorganizer_records",
       },
       {
         title: "Create Event",
         description: "Plan and schedule new events.",
-        icon: <FaPlus style={{ color: "#007bff" }} />, // Blue color
+        icon: <FaPlus style={{ color: "#007bffff" }} />, // Blue color
         link: "/student_ssg_eventorganizer_create_event",
       },
       {
         title: "Manage Events",
         description: "Modify, update, or remove existing events.",
-        icon: <FaCogs style={{ color: "#6f42c1" }} />, // Purple color
+        icon: <FaCogs style={{ color: "#6f42c1ff" }} />, // Purple color
         link: "/student_ssg_eventorganizer_manage_event",
       },
     ],
   };
 
   // Choose appropriate card set based on role
-  const cards = cardData[role] || cardData.student;
+  const baseCards = cardData[role] || cardData.student;
+  const cards = isStudentRole
+    ? [...baseCards, ...permissionCards]
+    : baseCards;
 
   return (
     <div
@@ -194,7 +278,7 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
         className="flex-grow-1"
         style={{
           padding: "2rem 1rem 2rem 3rem",
-          backgroundColor: "var(--page-background, #f5f7fa)",
+          backgroundColor: "var(--page-background, #f5f7faff)",
         }} // Changed right padding from 1rem to 3rem
       >
         {/* Welcoming Description */}
@@ -206,7 +290,7 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
           {/* Added marginRight */}
           <h2
             className="mb-3"
-            style={{ color: "var(--primary-color, #162F65)", fontWeight: "600" }}
+            style={{ color: "var(--primary-color, #162F65ff)", fontWeight: "600" }}
           >
             Welcome{" "}
             {role.charAt(0).toUpperCase() + role.slice(1).replace("-", " ")}!
@@ -238,7 +322,7 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
                       </div>
                       <h5
                         className="card-title mb-2"
-                        style={{ color: "var(--primary-color, #162F65)" }}
+                        style={{ color: "var(--primary-color, #162F65ff)" }}
                       >
                         {card.title}
                       </h5>
@@ -260,8 +344,8 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
       <footer
         className="mt-auto py-3"
         style={{
-          backgroundColor: "var(--page-background, #f8f9fa)",
-          borderTop: "1px solid #dee2e6",
+          backgroundColor: "var(--surface-3)",
+          borderTop: "1px solid var(--border-subtle)",
           paddingRight: "0rem",
           paddingLeft: "1rem",
         }} // Added paddingRight
@@ -281,7 +365,7 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
     }
     .hover-effect:hover {
       transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-md);
     }
     .icon-wrapper {
       transition: transform 0.3s ease;
@@ -301,3 +385,5 @@ export const HomeUser: React.FC<HomeUserProps> = ({ role }) => {
 };
 
 export default HomeUser;
+
+

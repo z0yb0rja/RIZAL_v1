@@ -7,7 +7,7 @@ const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
 
   // If no user is found, redirect to login
   if (!storedUser) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   // Parse user data safely
@@ -22,7 +22,7 @@ const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
 
   // If user data is invalid, redirect to login
   if (!user || !user.roles) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   const mustChangePassword = Boolean(user.mustChangePassword || user.must_change_password);
@@ -41,3 +41,5 @@ const ProtectedRoute = ({ allowedRoles }: { allowedRoles: string[] }) => {
 };
 
 export default ProtectedRoute;
+
+

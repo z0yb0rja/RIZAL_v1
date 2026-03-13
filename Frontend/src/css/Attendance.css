@@ -1,8 +1,8 @@
 /* Attendance Page Styles */
 .ams-page {
   min-height: 100vh;
-  background-color: #f5f7fa;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--page-background);
+  font-family: inherit;
 }
 
 .ams-container {
@@ -22,7 +22,7 @@
 }
 
 .ams-title {
-  color: #162f65;
+  color: var(--primary-color);
   font-size: 2.4rem;
   margin-bottom: 10px;
   font-weight: 600;
@@ -30,7 +30,7 @@
 }
 
 .ams-subtitle {
-  color: #6c757d;
+  color: #6c757dff;
   font-size: 1.1rem;
   margin-bottom: 0;
   font-weight: 400;
@@ -63,17 +63,17 @@
 .ams-search-input {
   width: 100%;
   padding: 14px 20px 14px 50px;
-  border: 1px solid #d1d7e0;
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
   font-size: 1rem;
   outline: none;
   transition: all 0.3s ease;
-  background-color: white;
+  background-color: var(--surface-2);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
 .ams-search-input:focus {
-  border-color: #162f65;
+  border-color: var(--primary-color);
   box-shadow: 0 2px 10px rgba(22, 47, 101, 0.15);
 }
 
@@ -86,12 +86,12 @@
 }
 
 .ams-card {
-  background-color: white;
+  background-color: var(--surface-2);
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
 }
@@ -130,27 +130,27 @@
 }
 
 .ams-pending {
-  background-color: #6c757d;
+  background-color: #6c757dff;
   color: white;
 }
 
 .ams-time-in {
-  background-color: #17a2b8;
+  background-color: #17a2b8ff;
   color: white;
 }
 
 .ams-checkpoint {
-  background-color: #ffc107;
-  color: #212529;
+  background-color: #ffc107ff;
+  color: #212529ff;
 }
 
 .ams-time-out {
-  background-color: #fd7e14;
+  background-color: #fd7e14ff;
   color: white;
 }
 
 .ams-completed {
-  background-color: #28a745;
+  background-color: #28a745ff;
   color: white;
 }
 
@@ -192,21 +192,21 @@
   margin: 0;
   font-size: 0.95rem;
   line-height: 1.5;
-  color: #495057;
+  color: var(--text-muted);
   padding: 0 5px;
 }
 
 .ams-student-info-section {
   display: flex;
   gap: 15px;
-  background-color: #f8f9fa;
+  background-color: var(--surface-1);
   padding: 15px;
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--border-subtle);
 }
 
 .ams-info-icon {
-  background-color: #162f65;
+  background-color: var(--primary-color);
   color: white;
   width: 40px;
   height: 40px;
@@ -223,7 +223,7 @@
 
 .ams-info-content h4 {
   margin: 0 0 15px 0;
-  color: #343a40;
+  color: var(--text-color);
   font-size: 1.1rem;
 }
 
@@ -242,7 +242,7 @@
   display: block;
   margin-bottom: 10px;
   font-weight: 500;
-  color: #495057;
+  color: #495057ff;
   font-size: 0.95rem;
 }
 
@@ -250,22 +250,22 @@
 .ams-form-group input {
   width: 100%;
   padding: 10px 12px;
-  border: 1px solid #d1d7e0;
+  border: 1px solid var(--border-subtle);
   border-radius: 6px;
   font-size: 0.95rem;
   transition: all 0.3s ease;
-  background-color: white;
+  background-color: var(--surface-2);
 }
 
 .ams-form-group select:focus,
 .ams-form-group input:focus {
-  border-color: #162f65;
+  border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 0 3px rgba(22, 47, 101, 0.1);
 }
 
 .ams-time-records-section {
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--border-subtle);
   padding: 20px 10px 0;
   margin-top: 10px;
 }
@@ -276,7 +276,7 @@
 
 .ams-time-record h4 {
   margin: 0 0 12px 0;
-  color: #343a40;
+  color: var(--text-color);
   font-size: 1rem;
   font-weight: 600;
 }
@@ -292,8 +292,8 @@
   align-items: center;
   justify-content: center;
   padding: 10px 16px;
-  background: linear-gradient(135deg, #FFC107 0%, #FF9800 100%);
-  color: #212529;
+  background: linear-gradient(135deg, #FFC107ff 0%, #FF9800ff 100%);
+  color: #212529ff;
   border: none;
   border-radius: 8px;
   font-weight: 600;
@@ -308,7 +308,7 @@
 }
 
 .ams-face-scan-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #FFB300 0%, #FB8C00 100%);
+  background: linear-gradient(135deg, #FFB300ff 0%, #FB8C00ff 100%);
   transform: translateY(-2px);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
@@ -329,7 +329,7 @@
 }
 
 .ams-face-scan-btn.ams-scanning {
-  background: linear-gradient(135deg, #FFA000 0%, #F57C00 100%);
+  background: linear-gradient(135deg, #FFA000ff 0%, #F57C00ff 100%);
   color: white;
 }
 
@@ -338,7 +338,7 @@
 }
 
 .ams-face-scan-btn.ams-success {
-  background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+  background: linear-gradient(135deg, #4CAF50ff 0%, #2E7D32ff 100%);
   color: white;
 }
 
@@ -352,15 +352,15 @@
   padding: 10px 12px;
   border-radius: 6px;
   font-size: 0.95rem;
-  background-color: #f8f9fa;
-  border: 1px solid #e9ecef;
+  background-color: var(--surface-1);
+  border: 1px solid var(--border-subtle);
   min-height: 42px;
   display: flex;
   align-items: center;
 }
 
 .ams-time-display .ams-recorded {
-  color: #28a745;
+  color: #28a745ff;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -368,14 +368,14 @@
 }
 
 .ams-time-display .ams-pending {
-  color: #6c757d;
+  color: #6c757dff;
   font-style: italic;
 }
 
 .ams-submit-section {
   margin-top: auto;
   padding-top: 15px;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -383,7 +383,7 @@
 
 .ams-submit-btn {
   padding: 12px 20px;
-  background: linear-gradient(135deg, #162f65 0%, #0d1b3a 100%);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -398,13 +398,13 @@
 }
 
 .ams-submit-btn:hover:not(:disabled) {
-  background: linear-gradient(135deg, #0d1b3a 0%, #162f65 100%);
+  background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(22, 47, 101, 0.2);
 }
 
 .ams-submit-btn:disabled {
-  background: #6c757d;
+  background: #6c757dff;
   cursor: not-allowed;
   opacity: 0.7;
 }
@@ -414,7 +414,7 @@
 }
 
 .ams-alternative-text {
-  color: #6c757d;
+  color: #6c757dff;
   font-size: 0.85rem;
   text-align: center;
   margin: 0;
@@ -423,10 +423,10 @@
 .ams-no-results {
   text-align: center;
   padding: 60px 20px;
-  background-color: white;
+  background-color: var(--surface-2);
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e9ecef;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-subtle);
   margin: 0 15px;
 }
 
@@ -436,14 +436,14 @@
 }
 
 .ams-no-results p {
-  color: #495057;
+  color: #495057ff;
   font-size: 1.2rem;
   margin-bottom: 8px;
   font-weight: 500;
 }
 
 .ams-no-results small {
-  color: #6c757d;
+  color: #6c757dff;
   font-size: 0.95rem;
 }
 
@@ -462,7 +462,7 @@
 }
 
 .ams-camera-modal-content {
-  background: white;
+  background: var(--surface-2);
   padding: 20px;
   border-radius: 8px;
   width: 90%;
@@ -495,12 +495,12 @@
 }
 
 .ams-camera-controls button:first-child {
-  background-color: #4CAF50;
+  background-color: #4CAF50ff;
   color: white;
 }
 
 .ams-camera-controls button:last-child {
-  background-color: #f44336;
+  background-color: #f44336ff;
   color: white;
 }
 
@@ -592,3 +592,5 @@
       justify-content: center;
   }
 }
+
+

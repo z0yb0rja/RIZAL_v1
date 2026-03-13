@@ -10,6 +10,8 @@ from zipfile import BadZipFile
 
 from openpyxl import Workbook, load_workbook
 from openpyxl.utils.exceptions import InvalidFileException
+from sqlalchemy import func
+from sqlalchemy.dialects.postgresql import insert as pg_insert
 from sqlalchemy.orm import Session
 
 from app.core.config import get_settings
@@ -30,6 +32,7 @@ from app.worker.celery_app import celery_app
 from app.models.department import Department
 from app.models.program import Program
 from app.models.school import School
+from app.models.associations import program_department_association
 
 
 logger = logging.getLogger(__name__)
@@ -302,6 +305,7 @@ class StudentImportService:
     ) -> tuple[int, int, List[dict]]:
         with SessionLocal() as db:
             repo = ImportRepository(db)
+            self._resolve_department_program_ids(db, row_buffer)
             success_rows, batch_errors = repo.bulk_insert_students(row_buffer, student_role_id)
             db.commit()
 
@@ -341,7 +345,83 @@ class StudentImportService:
             target_school_id=target_school_id,
             department_lookup=department_lookup,
             course_lookup=course_lookup,
+            allow_auto_create=True,
         )
+
+    def _resolve_department_program_ids(self, db: Session, rows: List[dict]) -> None:
+        department_name_map: dict[str, str] = {}
+        program_name_map: dict[str, str] = {}
+
+        for row in rows:
+            department_name = (row.get("department_name") or "").strip()
+            program_name = (row.get("program_name") or "").strip()
+            if department_name:
+                department_name_map[department_name.lower()] = department_name
+            if program_name:
+                program_name_map[program_name.lower()] = program_name
+
+        department_id_by_lower: dict[str, int] = {}
+        if department_name_map:
+            existing_departments = (
+                db.query(Department.id, Department.name)
+                .filter(func.lower(Department.name).in_(department_name_map.keys()))
+                .all()
+            )
+            department_id_by_lower = {
+                name.lower(): department_id for department_id, name in existing_departments
+            }
+            for lower_name, display_name in department_name_map.items():
+                if lower_name in department_id_by_lower:
+                    continue
+                department = Department(name=display_name)
+                db.add(department)
+                db.flush()
+                department_id_by_lower[lower_name] = department.id
+
+        program_id_by_lower: dict[str, int] = {}
+        if program_name_map:
+            existing_programs = (
+                db.query(Program.id, Program.name)
+                .filter(func.lower(Program.name).in_(program_name_map.keys()))
+                .all()
+            )
+            program_id_by_lower = {
+                name.lower(): program_id for program_id, name in existing_programs
+            }
+            for lower_name, display_name in program_name_map.items():
+                if lower_name in program_id_by_lower:
+                    continue
+                program = Program(name=display_name)
+                db.add(program)
+                db.flush()
+                program_id_by_lower[lower_name] = program.id
+
+        if department_id_by_lower or program_id_by_lower:
+            for row in rows:
+                if row.get("department_id") is None:
+                    department_name = (row.get("department_name") or "").strip()
+                    if department_name:
+                        row["department_id"] = department_id_by_lower.get(department_name.lower())
+                if row.get("program_id") is None:
+                    program_name = (row.get("program_name") or "").strip()
+                    if program_name:
+                        row["program_id"] = program_id_by_lower.get(program_name.lower())
+
+        link_rows = []
+        for row in rows:
+            department_id = row.get("department_id")
+            program_id = row.get("program_id")
+            if department_id and program_id:
+                link_rows.append({"program_id": program_id, "department_id": department_id})
+
+        if link_rows:
+            deduped = {(item["program_id"], item["department_id"]) for item in link_rows}
+            values = [{"program_id": program_id, "department_id": department_id} for program_id, department_id in deduped]
+            db.execute(
+                pg_insert(program_department_association)
+                .values(values)
+                .on_conflict_do_nothing()
+            )
 
     def _append_failed_row(self, failed_sheet, row_data: dict, error_message: str) -> None:
         row_values = [

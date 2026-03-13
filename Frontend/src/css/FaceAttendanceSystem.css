@@ -1,5 +1,5 @@
 .face-attendance-system {
-    font-family: Arial, sans-serif;
+    font-family: inherit;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -11,7 +11,7 @@
   }
   
   video {
-    background: #333;
+    background: #333333ff;
     width: 100%;
     max-width: 640px;
   }
@@ -19,7 +19,7 @@
   .camera-placeholder {
     width: 640px;
     height: 480px;
-    background: #333;
+    background: #333333ff;
     color: white;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@
   
   button {
     padding: 10px 15px;
-    background: #4CAF50;
+    background: var(--primary-color);
     color: white;
     border: none;
     cursor: pointer;
@@ -40,11 +40,11 @@
   }
   
   button:hover {
-    background: #45a049;
+    background: var(--secondary-color);
   }
   
   button:disabled {
-    background: #cccccc;
+    background: #ccccccff;
     cursor: not-allowed;
   }
   
@@ -61,7 +61,7 @@
   
   .attendance-list {
     margin-top: 20px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-subtle);
     padding: 10px;
     max-height: 300px;
     overflow-y: auto;
@@ -69,5 +69,7 @@
   
   .student-record {
     padding: 8px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-subtle);
   }
+
+

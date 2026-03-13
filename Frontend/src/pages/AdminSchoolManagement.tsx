@@ -15,8 +15,8 @@ import {
 
 const defaultForm: AdminSchoolItCreatePayload = {
   school_name: "",
-  primary_color: "#162F65",
-  secondary_color: "#2C5F9E",
+  primary_color: "#162F65ff",
+  secondary_color: "#2C5F9Eff",
   school_code: "",
   school_it_email: "",
   school_it_first_name: "",
@@ -122,7 +122,7 @@ const AdminSchoolManagement = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f5f7faff)" }}>
       <NavbarAdmin />
 
       <main className="container py-4">
@@ -164,7 +164,7 @@ const AdminSchoolManagement = () => {
                     <input
                       type="color"
                       className="form-control form-control-color"
-                      value={form.secondary_color || "#2C5F9E"}
+                      value={form.secondary_color || "#2C5F9Eff"}
                       onChange={(e) => setField("secondary_color", e.target.value)}
                     />
                   </div>
@@ -323,3 +323,6 @@ const AdminSchoolManagement = () => {
 };
 
 export default AdminSchoolManagement;
+
+
+

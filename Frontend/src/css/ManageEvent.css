@@ -1,19 +1,17 @@
 /* ManageEvent.css */
 :root {
-  --primary-color: #162f65;
-  --primary-hover: #3b5998;
-  --danger-color: #dc3545;
-  --danger-hover: #bd2130;
-  --success-color: #28a745;
-  --success-hover: #218838;
-  --light-color: #f8f9fa;
-  --dark-color: #343a40;
-  --gray-color: #6c757d;
-  --light-gray: #e9ecef;
-  --border-color: #dee2e6;
-  --border-radius: 8px;
-  --shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --transition: all 0.3s ease;
+  --primary-hover: var(--secondary-color);
+  --danger-color: #dc3545ff;
+  --danger-hover: #bd2130ff;
+  --success-color: #28a745ff;
+  --success-hover: #218838ff;
+  --light-color: var(--surface-1);
+  --dark-color: var(--text-color);
+  --gray-color: var(--text-muted);
+  --light-gray: var(--surface-4);
+  --border-color: var(--border-subtle);
+  --border-radius: var(--radius-md);
+  --shadow: var(--shadow-sm);
 }
 
 * {
@@ -23,9 +21,9 @@
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f5f7fa;
-  color: #333;
+  font-family: inherit;
+  background-color: var(--page-background);
+  color: var(--text-color);
   line-height: 1.6;
 }
 
@@ -92,7 +90,7 @@ body {
 
 /* Event Card */
 .event-card {
-  background: white;
+  background: var(--surface-2);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow);
   overflow: hidden;
@@ -108,7 +106,7 @@ body {
 
 .event-header {
   padding: 1rem;
-  background-color: #f8fafc;
+  background-color: #f8fafcff;
   border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
@@ -165,27 +163,27 @@ body {
 }
 
 .bg-primary {
-  background-color: #3b82f6;
+  background-color: #3b82f6ff;
   color: white;
 }
 
 .bg-warning {
-  background-color: #f59e0b;
-  color: #713f12;
+  background-color: #f59e0bff;
+  color: #713f12ff;
 }
 
 .bg-success {
-  background-color: #10b981;
+  background-color: #10b981ff;
   color: white;
 }
 
 .bg-danger {
-  background-color: #ef4444;
+  background-color: #ef4444ff;
   color: white;
 }
 
 .bg-secondary {
-  background-color: #6b7280;
+  background-color: #6b7280ff;
   color: white;
 }
 
@@ -238,7 +236,7 @@ body {
 }
 
 .btn-cancel:hover {
-  background-color: #5a6268;
+  background-color: #5a6268ff;
 }
 
 /* Status Select */
@@ -247,7 +245,7 @@ body {
   border-radius: var(--border-radius);
   border: 1px solid var(--border-color);
   font-size: 0.875rem;
-  background-color: white;
+  background-color: var(--surface-2);
   cursor: pointer;
   flex-grow: 1;
   outline: none;
@@ -275,7 +273,7 @@ body {
 }
 
 .modal-content {
-  background: white;
+  background: var(--surface-2);
   border-radius: var(--border-radius);
   width: 100%;
   max-width: 550px;
@@ -298,7 +296,7 @@ body {
   align-items: center;
   position: sticky;
   top: 0;
-  background: white;
+  background: var(--surface-2);
   z-index: 1;
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
@@ -337,7 +335,7 @@ body {
   gap: 0.75rem;
   position: sticky;
   bottom: 0;
-  background: white;
+  background: var(--surface-2);
   border-bottom-left-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
 }
@@ -431,7 +429,7 @@ body {
 .error-message {
   text-align: center;
   padding: 2rem 1rem;
-  background-color: #ffebee;
+  background-color: #ffebeeff;
   border-radius: var(--border-radius);
   color: var(--danger-color);
 }
@@ -449,13 +447,15 @@ body {
 
 .select-multiple option:checked,
 .select-multiple option.selected-option {
-  background-color: #007bff !important;
+  background-color: #007bffff !important;
   color: white !important;
 }
 
 /* Firefox specific styling */
 @-moz-document url-prefix() {
   .select-multiple option:checked {
-    box-shadow: 0 0 10px 100px #007bff inset !important;
+    box-shadow: 0 0 10px 100px #007bffff inset !important;
   }
 }
+
+

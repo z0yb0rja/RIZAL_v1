@@ -102,7 +102,7 @@ const SubscriptionCenter = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8f9fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f8f9faff)" }}>
       <NavbarComponent />
       <main className="container py-4">
         <h2 className="mb-3">Subscription & Usage</h2>
@@ -293,3 +293,6 @@ const SubscriptionCenter = () => {
 };
 
 export default SubscriptionCenter;
+
+
+

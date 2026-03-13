@@ -9,6 +9,7 @@ from typing import Iterable, Optional
 from fastapi import HTTPException, Request, status
 from sqlalchemy.orm import Session
 
+from app.core.config import get_settings
 from app.models.platform_features import LoginHistory, MfaChallenge, UserSecuritySetting, UserSession
 from app.models.user import User
 
@@ -45,9 +46,10 @@ def get_or_create_security_setting(db: Session, user: User) -> UserSecuritySetti
     if setting:
         return setting
 
+    settings = get_settings()
     setting = UserSecuritySetting(
         user_id=user.id,
-        mfa_enabled=is_privileged_user(user),
+        mfa_enabled=is_privileged_user(user) if settings.mfa_enabled else False,
         trusted_device_days=14,
     )
     db.add(setting)
@@ -56,6 +58,9 @@ def get_or_create_security_setting(db: Session, user: User) -> UserSecuritySetti
 
 
 def should_require_mfa(db: Session, user: User) -> bool:
+    settings = get_settings()
+    if not settings.mfa_enabled:
+        return False
     setting = get_or_create_security_setting(db, user)
     return bool(setting.mfa_enabled)
 

@@ -16,6 +16,8 @@ import { Profile } from "./pages/Profile";
 import Reports from "./pages/Reports";
 import { CreateEvent } from "./pages/CreateEvent";
 import { ManageEvent } from "./pages/ManageEvent";
+import StudentAnnouncements from "./pages/StudentAnnouncements";
+import StudentSsgEvents from "./pages/StudentSsgEvents";
 import Unauthorized from "./components/Unauthorized"; // Import Unauthorized Page
 import ErrorBoundary from "../src/components/ErrorBoundary";
 import FaceScan from "../src/pages/FaceScan";
@@ -33,13 +35,14 @@ import NotificationCenter from "./pages/NotificationCenter";
 import SecurityCenter from "./pages/SecurityCenter";
 import SubscriptionCenter from "./pages/SubscriptionCenter";
 import DataGovernance from "./pages/DataGovernance";
+import SSGPortal from "./pages/SSGPortal";
 
 const App = () => {
   return (
     <ErrorBoundary>
       <Routes>
         {/* Public Route */}
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<Home />} />
         <Route path="/change-password" element={<ChangePassword />} />
 
@@ -72,6 +75,8 @@ const App = () => {
         <Route element={<ProtectedRoute allowedRoles={["student"]} />}>
           <Route path="/student_dashboard" element={<StudentDashboard />} />
           <Route path="/student_home" element={<HomeUser role="student" />} />
+          <Route path="/student_announcements" element={<StudentAnnouncements />} />
+          <Route path="/student_ssg_events" element={<StudentSsgEvents />} />
           <Route
             path="/student_upcoming_events"
             element={<UpcomingEvents role="student" />}
@@ -241,6 +246,23 @@ const App = () => {
           />
         </Route>
 
+        {/* Shared SSG Portal */}
+        <Route
+          element={
+            <ProtectedRoute
+              allowedRoles={[
+                "admin",
+                "school_IT",
+                "student",
+                "ssg",
+                "event-organizer",
+              ]}
+            />
+          }
+        >
+          <Route path="/ssg_portal" element={<SSGPortal />} />
+        </Route>
+
         {/* Unauthorized Page (Accessible to Everyone) */}
         <Route path="/unauthorized" element={<Unauthorized />} />
 
@@ -252,3 +274,5 @@ const App = () => {
 };
 
 export default App;
+
+

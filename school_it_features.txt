@@ -1,0 +1,16 @@
+School IT Features (School_IT role)
+
+- School IT dashboard (home/overview)
+- Events: view and monitor school events and their status
+- Departments & Programs: create and maintain departments/programs
+- Branding: update school name, logo, and UI colors
+- Import Students via Excel: download template, preview validation, import, download error report, retry failed rows
+- Password Reset Requests: approve requests and send temporary passwords
+- Manage Users: view/edit users in the school scope; manage roles for students/SSG/event organizers
+- SSG Portal: create SSG role slots, assign students, manage permissions
+- Audit Logs: search and review school audit logs
+- Notification Center: manage notification preferences, dispatch test/missed/low attendance alerts, view logs
+- Security Center: MFA settings, session management, login history
+- Subscription & Usage: view usage metrics and manage subscription settings
+- Data Governance: retention settings, data requests, consent records, retention cleanup
+- Profile: view/update School IT profile

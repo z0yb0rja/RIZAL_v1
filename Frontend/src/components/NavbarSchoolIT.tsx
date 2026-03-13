@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FaBell,
+  FaBars,
   FaClipboardList,
   FaDatabase,
   FaFileImport,
@@ -11,31 +13,75 @@ import {
   FaShieldAlt,
   FaSitemap,
   FaUserCircle,
+  FaUserShield,
   FaUsers,
+  FaBullhorn,
+  FaCalendarAlt,
+  FaTimes,
 } from "react-icons/fa";
 import logoValid8 from "../assets/images/logo-valid83_transparent.png";
 import { useUser } from "../context/UserContext";
 import { normalizeLogoUrl } from "../api/schoolSettingsApi";
+import "../css/NavbarSchoolIT.css";
 
 const NavbarSchoolIT = () => {
   const { branding } = useUser();
   const logo = normalizeLogoUrl(branding?.logo_url) || logoValid8;
   const schoolName = branding?.school_name || "School IT";
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <nav
-      className="navbar navbar-expand-lg navbar-dark"
-      style={{ backgroundColor: "var(--primary-color, #162F65)" }}
-    >
-      <div className="container-fluid">
-        <NavLink to="/school_it_home" className="navbar-brand d-flex align-items-center gap-2">
-          <img
-            src={logo}
-            alt={`${schoolName} logo`}
-            style={{ width: 32, height: 32, borderRadius: "50%" }}
-          />
-          <span>{schoolName}</span>
-        </NavLink>
+    <>
+      {sidebarOpen && <div className="schoolit-overlay" onClick={() => setSidebarOpen(false)}></div>}
+      <div className={`schoolit-sidebar ${sidebarOpen ? "open" : ""}`}>
+        <div className="schoolit-sidebar-header">
+          <div className="d-flex align-items-center gap-2">
+            <img
+              src={logo}
+              alt={`${schoolName} logo`}
+              style={{ width: 32, height: 32, borderRadius: "50%" }}
+            />
+            <strong>{schoolName}</strong>
+          </div>
+          <button className="btn btn-sm btn-outline-secondary" onClick={() => setSidebarOpen(false)}>
+            <FaTimes />
+          </button>
+        </div>
+        <div className="schoolit-sidebar-nav">
+          <NavLink to="/school_it_home" className="nav-link" onClick={() => setSidebarOpen(false)}>
+            <FaHome /> Dashboard
+          </NavLink>
+          <NavLink to="/school_it_manage_users" className="nav-link" onClick={() => setSidebarOpen(false)}>
+            <FaUsers /> Students
+          </NavLink>
+          <NavLink to="/ssg_portal" className="nav-link" onClick={() => setSidebarOpen(false)}>
+            <FaUserShield /> SSG Role Management
+          </NavLink>
+          <NavLink to="/ssg_portal#ssg-announcements" className="nav-link" onClick={() => setSidebarOpen(false)}>
+            <FaBullhorn /> Announcements
+          </NavLink>
+          <NavLink to="/ssg_portal#ssg-events" className="nav-link" onClick={() => setSidebarOpen(false)}>
+            <FaCalendarAlt /> Events
+          </NavLink>
+        </div>
+      </div>
+
+      <nav
+        className="navbar navbar-expand-lg navbar-dark"
+        style={{ background: "var(--sidebar-bg)" }}
+      >
+        <div className="container-fluid">
+          <button className="schoolit-menu-btn" onClick={() => setSidebarOpen(true)} aria-label="Open menu">
+            <FaBars />
+          </button>
+          <NavLink to="/school_it_home" className="navbar-brand d-flex align-items-center gap-2 ms-2">
+            <img
+              src={logo}
+              alt={`${schoolName} logo`}
+              style={{ width: 32, height: 32, borderRadius: "50%" }}
+            />
+            <span>{schoolName}</span>
+          </NavLink>
 
         <button
           className="navbar-toggler"
@@ -94,6 +140,12 @@ const NavbarSchoolIT = () => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink to="/ssg_portal" className="nav-link">
+                <FaUserShield className="me-2" />
+                SSG Portal
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink to="/school_it_audit_logs" className="nav-link">
                 <FaClipboardList className="me-2" />
                 Audit Logs
@@ -131,9 +183,12 @@ const NavbarSchoolIT = () => {
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
+        </div>
+      </nav>
+    </>
   );
 };
 
 export default NavbarSchoolIT;
+
+

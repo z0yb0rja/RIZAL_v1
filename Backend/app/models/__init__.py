@@ -25,6 +25,15 @@ from app.models.platform_features import (
 from .role import Role
 from .user import User, UserRole, StudentProfile, SSGProfile
 from .attendance import Attendance  # If you have this model
+from .ssg import (
+    SSGRole,
+    SSGPermission,
+    SSGRolePermission,
+    SSGUserRole,
+    SSGEvent,
+    SSGAnnouncement,
+    SSGEventStatus,
+)
 
 __all__ = [
     "Base",
@@ -37,6 +46,13 @@ __all__ = [
     "School",
     "SchoolSetting",
     "SchoolAuditLog",
+    "SSGRole",
+    "SSGPermission",
+    "SSGRolePermission",
+    "SSGUserRole",
+    "SSGEvent",
+    "SSGAnnouncement",
+    "SSGEventStatus",
     "BulkImportJob",
     "BulkImportError",
     "EmailDeliveryLog",

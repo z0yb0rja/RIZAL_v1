@@ -283,3 +283,5 @@ export const updateEvent = async (eventId: number, eventData: any) => {
 
   return await response.json();
 };
+
+

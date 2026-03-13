@@ -128,6 +128,12 @@ const extractApiErrorMessage = async (response: Response, fallback: string): Pro
     clearAuthState();
     return "Session expired. Please log in again.";
   }
+  if (response.status === 429) {
+    const retryAfter = response.headers.get("Retry-After");
+    if (retryAfter) {
+      return `Too many import requests. Please wait ${retryAfter} seconds and try again.`;
+    }
+  }
 
   const body = await response.json().catch(() => null);
   if (!body) return fallback;
@@ -145,8 +151,8 @@ export const normalizeLogoUrl = (logoUrl?: string | null): string | null => {
 };
 
 export const applyTheme = (settings: Pick<SchoolSettings, "primary_color" | "secondary_color">) => {
-  const primary = settings.primary_color || "#162F65";
-  const secondary = settings.secondary_color || "#2C5F9E";
+  const primary = settings.primary_color || "#162F65ff";
+  const secondary = settings.secondary_color || "#2C5F9Eff";
   const root = document.documentElement;
   root.style.setProperty("--primary-color", primary);
   root.style.setProperty("--secondary-color", secondary);
@@ -301,11 +307,11 @@ export const importUsersFromExcel = async (file: File): Promise<ImportJobCreateR
     body: formData,
   });
 
-  const body = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(body.detail || "Failed to import users");
+    throw new Error(await extractApiErrorMessage(response, "Failed to import users"));
   }
 
+  const body = await response.json().catch(() => ({}));
   return body as ImportJobCreateResponse;
 };
 
@@ -319,11 +325,11 @@ export const previewImportUsersFromExcel = async (file: File): Promise<ImportPre
     body: formData,
   });
 
-  const body = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(body.detail || "Failed to preview import file");
+    throw new Error(await extractApiErrorMessage(response, "Failed to preview import file"));
   }
 
+  const body = await response.json().catch(() => ({}));
   return body as ImportPreviewSummary;
 };
 
@@ -333,11 +339,11 @@ export const getImportStatus = async (jobId: string): Promise<UserImportSummary>
     headers: withAuthHeaders(),
   });
 
-  const body = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(body.detail || "Failed to fetch import status");
+    throw new Error(await extractApiErrorMessage(response, "Failed to fetch import status"));
   }
 
+  const body = await response.json().catch(() => ({}));
   return body as UserImportSummary;
 };
 
@@ -376,10 +382,10 @@ export const retryFailedImportRows = async (
     body: JSON.stringify({ row_numbers: rowNumbers && rowNumbers.length ? rowNumbers : null }),
   });
 
-  const body = await response.json().catch(() => ({}));
   if (!response.ok) {
-    throw new Error(body.detail || "Failed to retry failed rows");
+    throw new Error(await extractApiErrorMessage(response, "Failed to retry failed rows"));
   }
+  const body = await response.json().catch(() => ({}));
   return body as ImportJobCreateResponse;
 };
 
@@ -484,3 +490,5 @@ export const adminResetSchoolItPassword = async (
   }
   return body as { user_id: number; email: string; temporary_password: string; must_change_password: boolean };
 };
+
+

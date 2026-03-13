@@ -97,7 +97,7 @@ const SecurityCenter = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f8f9fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f8f9faff)" }}>
       <NavbarComponent />
       <main className="container py-4">
         <h2 className="mb-3">Security Center</h2>
@@ -218,3 +218,6 @@ const SecurityCenter = () => {
 };
 
 export default SecurityCenter;
+
+
+

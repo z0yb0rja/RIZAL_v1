@@ -18,43 +18,43 @@ const StudentSsgEventDashboard = () => {
     {
       title: "Upcoming Events",
       description: "Stay informed about upcoming school events.",
-      icon: <FaCalendarAlt style={{ color: "#007bff" }} />,
+      icon: <FaCalendarAlt style={{ color: "#007bffff" }} />,
       link: "/student_ssg_eventorganizer_upcoming_events",
     },
     {
       title: "Events Attended",
       description: "Check and review the events you've attended.",
-      icon: <FaCheckCircle style={{ color: "#28a745" }} />,
+      icon: <FaCheckCircle style={{ color: "#28a745ff" }} />,
       link: "/student_ssg_eventorganizer_events_attended",
     },
     {
       title: "Events",
       description: "View and manage currently ongoing events.",
-      icon: <FaClipboardList style={{ color: "#ffc107" }} />,
+      icon: <FaClipboardList style={{ color: "#ffc107ff" }} />,
       link: "/student_ssg_eventorganizer_events",
     },
     {
       title: "Manual Attendance",
       description: "Record Attendance",
-      icon: <FaUsers style={{ color: "#17a2b8" }} />,
+      icon: <FaUsers style={{ color: "#17a2b8ff" }} />,
       link: "/student_ssg_eventorganizer_manual_attendance",
     },
     {
       title: "Records",
       description: "Access records and event history.",
-      icon: <FaChartBar style={{ color: "#6c757d" }} />,
+      icon: <FaChartBar style={{ color: "#6c757dff" }} />,
       link: "/student_ssg_eventorganizer_records",
     },
     {
       title: "Create Event",
       description: "Plan and schedule new events.",
-      icon: <FaPlus style={{ color: "#007bff" }} />,
+      icon: <FaPlus style={{ color: "#007bffff" }} />,
       link: "/student_ssg_eventorganizer_create_event",
     },
     {
       title: "Manage Events",
       description: "Modify, update, or remove existing events.",
-      icon: <FaCogs style={{ color: "#6f42c1" }} />,
+      icon: <FaCogs style={{ color: "#6f42c1ff" }} />,
       link: "/student_ssg_eventorganizer_manage_event",
     },
   ];
@@ -68,14 +68,14 @@ const StudentSsgEventDashboard = () => {
 
       <main
         className="flex-grow-1"
-        style={{ padding: "2rem 1rem 2rem 3rem", backgroundColor: "#f5f7fa" }}
+        style={{ padding: "2rem 1rem 2rem 3rem", backgroundColor: "var(--page-background)" }}
       >
         {/* Welcoming Description */}
         <div
           className="welcome-section text-center mb-5"
           style={{ marginRight: "2rem" }}
         >
-          <h2 className="mb-3" style={{ color: "#343a40", fontWeight: "600" }}>
+          <h2 className="mb-3" style={{ color: "var(--text-color)", fontWeight: "600" }}>
             Welcome Student ssg-eventorganizer!
           </h2>
           <p
@@ -103,7 +103,7 @@ const StudentSsgEventDashboard = () => {
                       </div>
                       <h5
                         className="card-title mb-2"
-                        style={{ color: "#343a40" }}
+                        style={{ color: "var(--text-color)" }}
                       >
                         {card.title}
                       </h5>
@@ -125,8 +125,8 @@ const StudentSsgEventDashboard = () => {
       <footer
         className="mt-auto py-3"
         style={{
-          backgroundColor: "#f8f9fa",
-          borderTop: "1px solid #dee2e6",
+          backgroundColor: "var(--surface-3)",
+          borderTop: "1px solid var(--border-subtle)",
           paddingRight: "0rem",
           paddingLeft: "1rem",
         }} // Added paddingRight
@@ -146,7 +146,7 @@ const StudentSsgEventDashboard = () => {
         }
         .hover-effect:hover {
           transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--shadow-md);
         }
         .icon-wrapper {
           transition: transform 0.3s ease;
@@ -166,3 +166,6 @@ const StudentSsgEventDashboard = () => {
 };
 
 export default StudentSsgEventDashboard;
+
+
+

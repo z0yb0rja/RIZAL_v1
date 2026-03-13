@@ -33,6 +33,7 @@ from app.models import import_job
 from app.models import password_reset_request
 from app.models import platform_features
 from app.models import user
+from app.models import ssg
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

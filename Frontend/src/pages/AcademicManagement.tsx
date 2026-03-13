@@ -265,13 +265,13 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
         style={{
           display: "flex",
           marginBottom: "20px",
-          borderBottom: "1px solid #ddd",
+          borderBottom: "1px solid #ddddddff",
         }}
       >
         <button
           style={{
             padding: "10px 20px",
-            background: activeTab === "departments" ? "#007bff" : "#f0f0f0",
+            background: activeTab === "departments" ? "#007bffff" : "#f0f0f0ff",
             color: activeTab === "departments" ? "white" : "black",
             border: "none",
             cursor: "pointer",
@@ -284,7 +284,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
         <button
           style={{
             padding: "10px 20px",
-            background: activeTab === "programs" ? "#007bff" : "#f0f0f0",
+            background: activeTab === "programs" ? "#007bffff" : "#f0f0f0ff",
             color: activeTab === "programs" ? "white" : "black",
             border: "none",
             cursor: "pointer",
@@ -299,8 +299,8 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
         <div
           style={{
             padding: "10px",
-            background: "#ffebee",
-            color: "#d32f2f",
+            background: "#ffebeeff",
+            color: "#d32f2fff",
             marginBottom: "20px",
             borderRadius: "4px",
           }}
@@ -330,7 +330,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                 style={{
                   width: "100%",
                   padding: "8px",
-                  border: "1px solid #ddd",
+                  border: "1px solid #ddddddff",
                   borderRadius: "4px",
                 }}
               />
@@ -339,7 +339,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
               type="submit"
               style={{
                 padding: "8px 16px",
-                background: "#007bff",
+                background: "#007bffff",
                 color: "white",
                 border: "none",
                 borderRadius: "4px",
@@ -357,7 +357,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                 }}
                 style={{
                   padding: "8px 16px",
-                  background: "#6c757d",
+                  background: "#6c757dff",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
@@ -380,7 +380,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                     key={dept.id}
                     style={{
                       padding: "15px",
-                      border: "1px solid #ddd",
+                      border: "1px solid #ddddddff",
                       borderRadius: "4px",
                       marginBottom: "10px",
                       display: "flex",
@@ -394,7 +394,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                         onClick={() => editDepartment(dept)}
                         style={{
                           padding: "5px 10px",
-                          background: "#17a2b8",
+                          background: "#17a2b8ff",
                           color: "white",
                           border: "none",
                           borderRadius: "4px",
@@ -408,7 +408,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                         onClick={() => deleteDepartment(dept.id)}
                         style={{
                           padding: "5px 10px",
-                          background: "#dc3545",
+                          background: "#dc3545ff",
                           color: "white",
                           border: "none",
                           borderRadius: "4px",
@@ -443,7 +443,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                 style={{
                   width: "100%",
                   padding: "8px",
-                  border: "1px solid #ddd",
+                  border: "1px solid #ddddddff",
                   borderRadius: "4px",
                 }}
               />
@@ -480,7 +480,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
               type="submit"
               style={{
                 padding: "8px 16px",
-                background: "#007bff",
+                background: "#007bffff",
                 color: "white",
                 border: "none",
                 borderRadius: "4px",
@@ -499,7 +499,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                 }}
                 style={{
                   padding: "8px 16px",
-                  background: "#6c757d",
+                  background: "#6c757dff",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
@@ -522,7 +522,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                     key={prog.id}
                     style={{
                       padding: "15px",
-                      border: "1px solid #ddd",
+                      border: "1px solid #ddddddff",
                       borderRadius: "4px",
                       marginBottom: "10px",
                     }}
@@ -540,7 +540,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                           onClick={() => editProgram(prog)}
                           style={{
                             padding: "5px 10px",
-                            background: "#17a2b8",
+                            background: "#17a2b8ff",
                             color: "white",
                             border: "none",
                             borderRadius: "4px",
@@ -554,7 +554,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                           onClick={() => deleteProgram(prog.id)}
                           style={{
                             padding: "5px 10px",
-                            background: "#dc3545",
+                            background: "#dc3545ff",
                             color: "white",
                             border: "none",
                             borderRadius: "4px",
@@ -587,7 +587,7 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
                               <li
                                 key={deptId}
                                 style={{
-                                  background: "#e9ecef",
+                                  background: "#e9ecefff",
                                   padding: "3px 8px",
                                   borderRadius: "12px",
                                   fontSize: "0.9em",
@@ -612,3 +612,5 @@ const AcademicManagement: React.FC<AcademicManagementProps> = ({ role = "admin" 
 };
 
 export default AcademicManagement;
+
+

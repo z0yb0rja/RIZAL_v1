@@ -11,19 +11,19 @@ export const SSGDashboard: React.FC = () => {
     {
       title: "Events",
       description: "View and manage currently ongoing events.",
-      icon: <FaClipboardList style={{ color: "#ffc107" }} />, // Yellow color
+      icon: <FaClipboardList style={{ color: "#ffc107ff" }} />, // Yellow color
       link: "/ssg_events",
     },
     {
       title: "Records",
       description: "Access records and event history.",
-      icon: <FaChartBar style={{ color: "#6c757d" }} />, // Gray color
+      icon: <FaChartBar style={{ color: "#6c757dff" }} />, // Gray color
       link: "/ssg_records",
     },
     {
       title: "Manual Attendance",
       description: "Records Attendance.",
-      icon: <FaUsers style={{ color: "#6c757d" }} />, // Gray color
+      icon: <FaUsers style={{ color: "#6c757dff" }} />, // Gray color
       link: "/ssg_manual_attendance",
     },
   ];
@@ -37,14 +37,14 @@ export const SSGDashboard: React.FC = () => {
 
       <main
         className="flex-grow-1"
-        style={{ padding: "2rem 1rem 2rem 3rem", backgroundColor: "#f5f7fa" }}
+        style={{ padding: "2rem 1rem 2rem 3rem", backgroundColor: "var(--page-background)" }}
       >
         {/* Welcoming Description */}
         <div
           className="welcome-section text-center mb-5"
           style={{ marginRight: "2rem" }}
         >
-          <h2 className="mb-3" style={{ color: "#343a40", fontWeight: "600" }}>
+          <h2 className="mb-3" style={{ color: "var(--text-color)", fontWeight: "600" }}>
             Welcome Ssg!
           </h2>
           <p
@@ -72,7 +72,7 @@ export const SSGDashboard: React.FC = () => {
                       </div>
                       <h5
                         className="card-title mb-2"
-                        style={{ color: "#343a40" }}
+                        style={{ color: "var(--text-color)" }}
                       >
                         {card.title}
                       </h5>
@@ -94,8 +94,8 @@ export const SSGDashboard: React.FC = () => {
       <footer
         className="mt-auto py-3"
         style={{
-          backgroundColor: "#f8f9fa",
-          borderTop: "1px solid #dee2e6",
+          backgroundColor: "var(--surface-3)",
+          borderTop: "1px solid var(--border-subtle)",
           paddingRight: "0rem",
           paddingLeft: "1rem",
         }} // Added paddingRight
@@ -115,7 +115,7 @@ export const SSGDashboard: React.FC = () => {
         }
         .hover-effect:hover {
           transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+          box-shadow: var(--shadow-md);
         }
         .icon-wrapper {
           transition: transform 0.3s ease;
@@ -135,3 +135,6 @@ export const SSGDashboard: React.FC = () => {
 };
 
 export default SSGDashboard;
+
+
+

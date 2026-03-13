@@ -43,9 +43,9 @@ interface Event {
 }
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
-const PRIMARY_COLOR = "var(--primary-color, #162F65)";
-const SECONDARY_COLOR = "var(--secondary-color, #2C5F9E)";
-const ACCENT_COLOR = "var(--accent-color, #4A90E2)";
+const PRIMARY_COLOR = "var(--primary-color, #162F65ff)";
+const SECONDARY_COLOR = "var(--secondary-color, #2C5F9Eff)";
+const ACCENT_COLOR = "var(--accent-color, #4A90E2ff)";
 
 export const Reports: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -194,22 +194,23 @@ export const Reports: React.FC = () => {
       <head>
         <title>${report.event_name} - Attendance Report</title>
         <style>
-          body { font-family: Arial, sans-serif; margin: 40px; }
+          @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap');
+          body { font-family: 'Raleway', 'Segoe UI', sans-serif; margin: 40px; color: #1f2937ff; }
           .header { margin-bottom: 30px; }
-          h1 { color: #333; margin-bottom: 5px; }
-          .event-details { color: #666; margin-bottom: 20px; }
+          h1 { color: #111827ff; margin-bottom: 5px; }
+          .event-details { color: #6b7280ff; margin-bottom: 20px; }
           .summary-section { margin-bottom: 30px; }
           .summary-cards { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; }
-          .summary-card { border: 1px solid #ddd; border-radius: 8px; padding: 15px; width: 200px; }
-          .card-title { display: block; font-size: 14px; color: #666; }
+          .summary-card { border: 1px solid #e5e7ebff; border-radius: 8px; padding: 15px; width: 200px; }
+          .card-title { display: block; font-size: 14px; color: #6b7280ff; }
           .card-value { display: block; font-size: 24px; font-weight: bold; margin-top: 5px; }
-          .total .card-value { color: #2196F3; }
-          .present .card-value { color: #4CAF50; }
-          .absent .card-value { color: #F44336; }
-          .rate .card-value { color: #FF9800; }
+          .total .card-value { color: #2563ebff; }
+          .present .card-value { color: #16a34aff; }
+          .absent .card-value { color: #dc2626ff; }
+          .rate .card-value { color: #f59e0bff; }
           table { width: 100%; border-collapse: collapse; margin-bottom: 30px; }
-          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-          th { background-color: #f2f2f2; }
+          th, td { border: 1px solid #e5e7ebff; padding: 8px; text-align: left; }
+          th { background-color: #f3f4f6ff; }
           @media print {
             .no-print { display: none; }
           }
@@ -273,8 +274,8 @@ export const Reports: React.FC = () => {
           </tbody>
         </table>
         <div class="no-print" style="margin-top: 40px; text-align: center;">
-          <button onclick="window.print();" style="padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Print Report</button>
-          <button onclick="window.close();" style="padding: 10px 20px; background-color: #f44336; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-left: 10px;">Close</button>
+          <button onclick="window.print();" style="padding: 10px 20px; background-color: #2196F3ff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px;">Print Report</button>
+          <button onclick="window.close();" style="padding: 10px 20px; background-color: #f44336ff; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-left: 10px;">Close</button>
         </div>
       </body>
       </html>
@@ -329,7 +330,7 @@ export const Reports: React.FC = () => {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "var(--page-background, #f5f5f5)",
+        backgroundColor: "var(--page-background, #f5f5f5ff)",
         fontFamily: "Arial, sans-serif",
       }}
     >
@@ -397,7 +398,7 @@ export const Reports: React.FC = () => {
                 width: "100%",
                 padding: "10px 15px 10px 35px",
                 borderRadius: "4px",
-                border: "1px solid #ddd",
+                border: "1px solid #ddddddff",
                 fontSize: "16px",
               }}
               value={searchTerm}
@@ -410,7 +411,7 @@ export const Reports: React.FC = () => {
           <div
             style={{
               marginBottom: "16px",
-              color: "#495057",
+              color: "#495057ff",
               fontSize: "14px",
             }}
           >
@@ -429,7 +430,7 @@ export const Reports: React.FC = () => {
             style={{
               width: "100%",
               borderCollapse: "collapse",
-              backgroundColor: "white",
+              backgroundColor: "var(--surface-2)",
               borderRadius: "8px",
               boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
             }}
@@ -437,8 +438,8 @@ export const Reports: React.FC = () => {
             <thead>
               <tr
                 style={{
-                  backgroundColor: "#f8f9fa",
-                  borderBottom: "1px solid #ddd",
+                  backgroundColor: "var(--page-background, #f8f9faff)",
+                  borderBottom: "1px solid #ddddddff",
                 }}
               >
                 <th style={{ padding: "12px 15px", textAlign: "left" }}>
@@ -460,7 +461,7 @@ export const Reports: React.FC = () => {
                 <tr
                   key={event.id}
                   style={{
-                    borderBottom: "1px solid #eee",
+                    borderBottom: "1px solid #eeeeeeff",
                   }}
                 >
                   <td style={{ padding: "12px 15px" }}>{event.name}</td>
@@ -542,7 +543,7 @@ export const Reports: React.FC = () => {
                     style={{
                       padding: "20px",
                       textAlign: "center",
-                      color: "#666",
+                      color: "#666666ff",
                     }}
                   >
                     No matching events found. Try a different search term.
@@ -570,7 +571,7 @@ export const Reports: React.FC = () => {
               },
               content: {
                 position: "relative",
-                backgroundColor: "white",
+                backgroundColor: "var(--surface-2)",
                 borderRadius: "8px",
                 padding: "20px",
                 maxWidth: "900px",
@@ -634,7 +635,7 @@ export const Reports: React.FC = () => {
                 style={{
                   padding: "8px",
                   borderRadius: "4px",
-                  border: "1px solid #ddd",
+                  border: "1px solid #ddddddff",
                 }}
               >
                 <option value="all">All Programs</option>
@@ -654,7 +655,7 @@ export const Reports: React.FC = () => {
             >
               <h4
                 style={{
-                  borderBottom: "1px solid #eee",
+                  borderBottom: "1px solid #eeeeeeff",
                   paddingBottom: "10px",
                   color: PRIMARY_COLOR,
                 }}
@@ -671,7 +672,7 @@ export const Reports: React.FC = () => {
               >
                 <div
                   style={{
-                    backgroundColor: "#f8f9fa",
+                    backgroundColor: "var(--page-background, #f8f9faff)",
                     borderRadius: "8px",
                     padding: "15px",
                     textAlign: "center",
@@ -681,7 +682,7 @@ export const Reports: React.FC = () => {
                     style={{
                       display: "block",
                       fontSize: "14px",
-                      color: "#666",
+                      color: "#666666ff",
                     }}
                   >
                     Total Participants
@@ -701,7 +702,7 @@ export const Reports: React.FC = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: "#e8f5e9",
+                    backgroundColor: "#e8f5e9ff",
                     borderRadius: "8px",
                     padding: "15px",
                     textAlign: "center",
@@ -711,7 +712,7 @@ export const Reports: React.FC = () => {
                     style={{
                       display: "block",
                       fontSize: "14px",
-                      color: "#666",
+                      color: "#666666ff",
                     }}
                   >
                     Attendees
@@ -721,7 +722,7 @@ export const Reports: React.FC = () => {
                       display: "block",
                       fontSize: "24px",
                       fontWeight: "bold",
-                      color: "#4CAF50",
+                      color: "#4CAF50ff",
                     }}
                   >
                     {selectedProgram === "all"
@@ -731,7 +732,7 @@ export const Reports: React.FC = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: "#ffebee",
+                    backgroundColor: "#ffebeeff",
                     borderRadius: "8px",
                     padding: "15px",
                     textAlign: "center",
@@ -741,7 +742,7 @@ export const Reports: React.FC = () => {
                     style={{
                       display: "block",
                       fontSize: "14px",
-                      color: "#666",
+                      color: "#666666ff",
                     }}
                   >
                     Absentees
@@ -751,7 +752,7 @@ export const Reports: React.FC = () => {
                       display: "block",
                       fontSize: "24px",
                       fontWeight: "bold",
-                      color: "#F44336",
+                      color: "#F44336ff",
                     }}
                   >
                     {selectedProgram === "all"
@@ -761,7 +762,7 @@ export const Reports: React.FC = () => {
                 </div>
                 <div
                   style={{
-                    backgroundColor: "#e3f2fd",
+                    backgroundColor: "#e3f2fdff",
                     borderRadius: "8px",
                     padding: "15px",
                     textAlign: "center",
@@ -771,7 +772,7 @@ export const Reports: React.FC = () => {
                     style={{
                       display: "block",
                       fontSize: "14px",
-                      color: "#666",
+                      color: "#666666ff",
                     }}
                   >
                     Attendance Rate
@@ -819,7 +820,7 @@ export const Reports: React.FC = () => {
                 <div
                   style={{
                     height: "300px",
-                    backgroundColor: "white",
+                    backgroundColor: "var(--surface-2)",
                     borderRadius: "8px",
                     padding: "15px",
                   }}
@@ -838,8 +839,8 @@ export const Reports: React.FC = () => {
                           `${name}: ${(percent * 100).toFixed(0)}%`
                         }
                       >
-                        <Cell fill="#4CAF50" />
-                        <Cell fill="#F44336" />
+                        <Cell fill="#4CAF50ff" />
+                        <Cell fill="#F44336ff" />
                       </Pie>
                       <Tooltip
                         formatter={(value) => [`${value} participants`, ""]}
@@ -863,7 +864,7 @@ export const Reports: React.FC = () => {
                   <div
                     style={{
                       height: "300px",
-                      backgroundColor: "white",
+                      backgroundColor: "var(--surface-2)",
                       borderRadius: "8px",
                       padding: "15px",
                     }}
@@ -903,9 +904,9 @@ export const Reports: React.FC = () => {
                         <Bar
                           dataKey="present"
                           name="Attendees"
-                          fill="#4CAF50"
+                          fill="#4CAF50ff"
                         />
-                        <Bar dataKey="absent" name="Absentees" fill="#F44336" />
+                        <Bar dataKey="absent" name="Absentees" fill="#F44336ff" />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -919,7 +920,7 @@ export const Reports: React.FC = () => {
                 style={{
                   color: PRIMARY_COLOR,
                   marginBottom: "15px",
-                  borderBottom: "1px solid #eee",
+                  borderBottom: "1px solid #eeeeeeff",
                   paddingBottom: "10px",
                 }}
               >
@@ -934,14 +935,14 @@ export const Reports: React.FC = () => {
                   style={{
                     width: "100%",
                     borderCollapse: "collapse",
-                    backgroundColor: "white",
+                    backgroundColor: "var(--surface-2)",
                     borderRadius: "8px",
                   }}
                 >
                   <thead>
                     <tr
                       style={{
-                        backgroundColor: "#f8f9fa",
+                        backgroundColor: "var(--page-background, #f8f9faff)",
                       }}
                     >
                       <th style={{ padding: "12px 15px", textAlign: "left" }}>
@@ -966,7 +967,7 @@ export const Reports: React.FC = () => {
                       <tr
                         key={program.program}
                         style={{
-                          borderBottom: "1px solid #eee",
+                          borderBottom: "1px solid #eeeeeeff",
                         }}
                       >
                         <td style={{ padding: "12px 15px" }}>
@@ -981,7 +982,7 @@ export const Reports: React.FC = () => {
                           style={{
                             padding: "12px 15px",
                             textAlign: "right",
-                            color: "#4CAF50",
+                            color: "#4CAF50ff",
                           }}
                         >
                           {program.present}
@@ -990,7 +991,7 @@ export const Reports: React.FC = () => {
                           style={{
                             padding: "12px 15px",
                             textAlign: "right",
-                            color: "#F44336",
+                            color: "#F44336ff",
                           }}
                         >
                           {program.absent}
@@ -1056,7 +1057,7 @@ export const Reports: React.FC = () => {
                 onClick={() => setSelectedEvent(null)}
                 style={{
                   padding: "10px 20px",
-                  backgroundColor: "#6c757d",
+                  backgroundColor: "#6c757dff",
                   color: "white",
                   border: "none",
                   borderRadius: "4px",
@@ -1075,3 +1076,6 @@ export const Reports: React.FC = () => {
 };
 
 export default Reports;
+
+
+

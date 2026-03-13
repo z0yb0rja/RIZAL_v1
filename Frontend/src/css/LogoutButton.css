@@ -4,8 +4,8 @@
     align-items: center;
     gap: 8px;
     background-color: transparent;
-    color: #ef4444;
-    border: 1px solid #ef4444;
+    color: #ef4444ff;
+    border: 1px solid #ef4444ff;
     border-radius: 6px;
     padding: 8px 16px;
     font-size: 14px;
@@ -16,7 +16,7 @@
   }
   
   .logout-button:hover {
-    background-color: #fee2e2;
+    background-color: #fee2e2ff;
   }
   
   .logout-button:active {
@@ -43,7 +43,7 @@
   }
   
   .logout-confirm-dialog {
-    background-color: white;
+    background-color: var(--surface-2);
     padding: 24px;
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
@@ -63,18 +63,18 @@
   
   .logout-confirm-header h3 {
     margin: 0;
-    color: #1f2937;
+    color: #1f2937ff;
     font-size: 18px;
     font-weight: 600;
   }
   
   .confirm-icon {
-    color: #ef4444;
+    color: #ef4444ff;
     font-size: 20px;
   }
   
   .logout-confirm-dialog p {
-    color: #6b7280;
+    color: #6b7280ff;
     margin-bottom: 24px;
     line-height: 1.5;
   }
@@ -97,22 +97,22 @@
   }
   
   .logout-confirm-cancel {
-    background-color: white;
-    color: #4b5563;
-    border: 1px solid #d1d5db;
+    background-color: var(--surface-2);
+    color: #4b5563ff;
+    border: 1px solid #d1d5dbff;
   }
   
   .logout-confirm-cancel:hover {
-    background-color: #f3f4f6;
+    background-color: #f3f4f6ff;
   }
   
   .logout-confirm-proceed {
-    background-color: #ef4444;
+    background-color: #ef4444ff;
     color: white;
   }
   
   .logout-confirm-proceed:hover {
-    background-color: #dc2626;
+    background-color: #dc2626ff;
   }
   
   .logout-confirm-proceed:disabled,
@@ -142,7 +142,7 @@
   .logout-loading-spinner {
     border: 3px solid rgba(239, 68, 68, 0.2);
     border-radius: 50%;
-    border-top: 3px solid #ef4444;
+    border-top: 3px solid #ef4444ff;
     width: 40px;
     height: 40px;
     animation: spin 1s linear infinite;
@@ -150,7 +150,7 @@
   }
   
   .logout-loading-content p {
-    color: #1f2937;
+    color: #1f2937ff;
     font-weight: 500;
   }
   
@@ -176,3 +176,5 @@
       width: 100%;
     }
   }
+
+

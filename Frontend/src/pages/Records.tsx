@@ -353,8 +353,8 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
       datasets: [
         {
           data: [attendedEvents, absentEvents],
-          backgroundColor: ["#4CAF50", "#F44336"],
-          borderColor: ["#388E3C", "#D32F2F"],
+          backgroundColor: ["#4CAF50ff", "#F44336ff"],
+          borderColor: ["#388E3Cff", "#D32F2Fff"],
           borderWidth: 1,
         },
       ],
@@ -374,7 +374,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
               return reportData.monthly_stats[month]?.present || 0;
             return 0;
           }),
-          backgroundColor: "#4CAF50",
+          backgroundColor: "#4CAF50ff",
         },
         {
           label: "Absent",
@@ -385,7 +385,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
               return reportData.monthly_stats[month]?.absent || 0;
             return 0;
           }),
-          backgroundColor: "#F44336",
+          backgroundColor: "#F44336ff",
         },
       ],
     };
@@ -603,7 +603,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
 
       <style>{`
         .records-container {
-          font-family: Arial, sans-serif;
+          font-family: var(--font-sans);
           max-width: 1200px;
           margin: 0 auto;
           padding: 20px;
@@ -626,7 +626,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         .header h1 {
           font-size: clamp(1.5rem, 2vw, 2rem);
           margin: 0;
-          color: #333;
+          color: #333333ff;
         }
 
         .controls {
@@ -648,13 +648,13 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         .search-icon {
           position: absolute;
           left: 10px;
-          color: #666;
+          color: #666666ff;
           z-index: 1;
         }
 
         .search-box input {
           padding: 8px 10px 8px 35px;
-          border: 1px solid #ddd;
+          border: 1px solid #ddddddff;
           border-radius: 4px;
           width: 100%;
           font-size: 14px;
@@ -666,7 +666,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
           align-items: center;
           gap: 5px;
           padding: 8px 15px;
-          background: #4caf50;
+          background: #4caf50ff;
           color: white;
           border: none;
           border-radius: 4px;
@@ -681,27 +681,27 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         }
 
         .filter-btn {
-          background: #2196F3;
+          background: #2196F3ff;
         }
 
         .reset-btn {
-          background: #9E9E9E;
+          background: #9E9E9Eff;
         }
 
         .view-details-btn {
-          background: #2196F3;
+          background: #2196F3ff;
           padding: 6px 10px;
           font-size: 13px;
         }
 
         button:disabled {
-          background: #cccccc;
+          background: #ccccccff;
           cursor: not-allowed;
           opacity: 0.7;
         }
 
         .back-button {
-          background: #666;
+          background: #666666ff;
           margin-bottom: 20px;
         }
 
@@ -719,8 +719,8 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         }
 
         .error-message {
-          color: #d32f2f;
-          background: #ffebee;
+          color: #d32f2fff;
+          background: #ffebeeff;
           padding: 10px;
           border-radius: 4px;
           margin-bottom: 20px;
@@ -743,17 +743,17 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         th, td {
           padding: 12px 15px;
           text-align: left;
-          border-bottom: 1px solid #ddd;
+          border-bottom: 1px solid #ddddddff;
         }
 
         th {
-          background-color: #f5f5f5;
+          background-color: #f5f5f5ff;
           font-weight: 600;
           white-space: nowrap;
         }
 
         tr:hover {
-          background-color: #f9f9f9;
+          background-color: #f9f9f9ff;
         }
 
         .badge {
@@ -766,18 +766,18 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         }
 
         .badge.present {
-          background: #e8f5e9;
-          color: #2e7d32;
+          background: #e8f5e9ff;
+          color: #2e7d32ff;
         }
 
         .badge.absent {
-          background: #ffebee;
-          color: #c62828;
+          background: #ffebeeff;
+          color: #c62828ff;
         }
 
         .date {
           font-size: 12px;
-          color: #666;
+          color: #666666ff;
           margin-top: 3px;
         }
 
@@ -790,7 +790,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         .no-attendance {
           padding: 20px;
           text-align: center;
-          color: #666;
+          color: #666666ff;
           font-size: 16px;
         }
 
@@ -808,12 +808,12 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
 
         .student-summary h2 {
           margin: 0 0 5px 0;
-          color: #333;
+          color: #333333ff;
           font-size: 1.5rem;
         }
 
         .student-id {
-          color: #666;
+          color: #666666ff;
           margin: 0 0 15px 0;
           font-size: 14px;
         }
@@ -826,7 +826,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         }
 
         .stat-card {
-          background: #f9f9f9;
+          background: #f9f9f9ff;
           padding: 15px;
           border-radius: 8px;
           text-align: center;
@@ -836,14 +836,14 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         .stat-card h3 {
           margin: 0 0 10px 0;
           font-size: 14px;
-          color: #555;
+          color: #555555ff;
         }
 
         .stat-card p {
           margin: 0;
           font-size: 1.5rem;
           font-weight: bold;
-          color: #333;
+          color: #333333ff;
         }
 
         .charts-section {
@@ -863,7 +863,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         .chart-container h3 {
           margin-top: 0;
           margin-bottom: 15px;
-          color: #333;
+          color: #333333ff;
           font-size: 1.2rem;
         }
 
@@ -883,7 +883,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
         .attendance-details h3 {
           margin-top: 0;
           font-size: 1.2rem;
-          color: #333;
+          color: #333333ff;
         }
 
         /* Filters styling */
@@ -912,13 +912,13 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
 
         .filter-group label {
           font-size: 14px;
-          color: #555;
+          color: #555555ff;
         }
 
         .filter-group input,
         .filter-group select {
           padding: 8px 12px;
-          border: 1px solid #ddd;
+          border: 1px solid #ddddddff;
           border-radius: 4px;
           font-size: 14px;
           width: 100%;
@@ -979,7 +979,7 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
           .show-on-small {
             display: block;
             font-size: 12px;
-            color: #666;
+            color: #666666ff;
             margin-top: 4px;
           }
         }
@@ -1062,3 +1062,5 @@ export const Records: React.FC<RecordsProps> = ({ role }) => {
 };
 
 export default Records;
+
+

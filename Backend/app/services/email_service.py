@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import smtplib
+import ssl
 from email.message import EmailMessage
 from typing import Optional
 
@@ -11,6 +12,32 @@ class EmailDeliveryError(Exception):
     pass
 
 
+def _resolve_from_email(settings) -> str:
+    from_email = (settings.smtp_from_email or "").strip()
+    if not from_email:
+        from_email = (settings.smtp_username or "").strip()
+    return from_email
+
+
+def _open_smtp_connection(settings) -> smtplib.SMTP:
+    host = (settings.smtp_host or "").strip()
+    port = settings.smtp_port
+    timeout_seconds = 20
+    use_ssl = bool(settings.smtp_use_ssl or port == 465)
+
+    if use_ssl:
+        context = ssl.create_default_context()
+        return smtplib.SMTP_SSL(host, port, timeout=timeout_seconds, context=context)
+
+    smtp = smtplib.SMTP(host, port, timeout=timeout_seconds)
+    smtp.ehlo()
+    if settings.smtp_use_tls:
+        context = ssl.create_default_context()
+        smtp.starttls(context=context)
+        smtp.ehlo()
+    return smtp
+
+
 def _send_email(subject: str, recipient_email: str, body: str) -> None:
     settings = get_settings()
     if not settings.smtp_host:
@@ -19,19 +46,28 @@ def _send_email(subject: str, recipient_email: str, body: str) -> None:
 
     msg = EmailMessage()
     msg["Subject"] = subject
-    msg["From"] = settings.smtp_from_email
+    from_email = _resolve_from_email(settings)
+    if not from_email:
+        raise EmailDeliveryError("SMTP_FROM_EMAIL or SMTP_USERNAME must be configured.")
+    msg["From"] = from_email
     msg["To"] = recipient_email
     msg.set_content(body)
 
     try:
-        with smtplib.SMTP(settings.smtp_host, settings.smtp_port, timeout=20) as smtp:
-            if settings.smtp_use_tls:
-                smtp.starttls()
-            if settings.smtp_username:
-                smtp.login(settings.smtp_username, settings.smtp_password)
+        with _open_smtp_connection(settings) as smtp:
+            username = (settings.smtp_username or "").strip()
+            password = settings.smtp_password or ""
+            if username and not password:
+                raise EmailDeliveryError("SMTP_USERNAME is set but SMTP_PASSWORD is empty.")
+            if username:
+                smtp.login(username, password)
             smtp.send_message(msg)
+    except EmailDeliveryError:
+        raise
     except Exception as exc:
-        print(f"\n--- [SMTP FAILURE] ---\nError: {exc}\nFalling back to console print:\nTo: {recipient_email}\nSubject: {subject}\nBody: {body}\n----------------------\n")
+        raise EmailDeliveryError(
+            f"SMTP send failed ({settings.smtp_host}:{settings.smtp_port}): {exc}"
+        ) from exc
 
 
 def send_plain_email(

@@ -310,20 +310,20 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
           max-width: 800px;
           margin: 0 auto;
           padding: 20px;
-          font-family: Arial, sans-serif;
+          font-family: var(--font-sans);
         }
 
         .tabs {
           display: flex;
-          border-bottom: 1px solid #ccc;
+          border-bottom: 1px solid #ccccccff;
           margin-bottom: 20px;
         }
 
         .tab {
           padding: 10px 20px;
           cursor: pointer;
-          background: #f5f5f5;
-          border: 1px solid #ccc;
+          background: #f5f5f5ff;
+          border: 1px solid #ccccccff;
           border-bottom: none;
           margin-right: 5px;
         }
@@ -335,7 +335,7 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
         }
 
         .camera-section {
-          background: #f9f9f9;
+          background: #f9f9f9ff;
           padding: 20px;
           border-radius: 8px;
           margin-bottom: 20px;
@@ -349,7 +349,7 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
         video {
           width: 100%;
           max-width: 640px;
-          border: 2px solid #ddd;
+          border: 2px solid #ddddddff;
           border-radius: 8px;
         }
 
@@ -372,39 +372,39 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
         }
 
         .btn-primary {
-          background: #007bff;
+          background: #007bffff;
           color: white;
         }
 
         .btn-primary:hover {
-          background: #0056b3;
+          background: #0056b3ff;
         }
 
         .btn-secondary {
-          background: #6c757d;
+          background: #6c757dff;
           color: white;
         }
 
         .btn-secondary:hover {
-          background: #545b62;
+          background: #545b62ff;
         }
 
         .btn-success {
-          background: #28a745;
+          background: #28a745ff;
           color: white;
         }
 
         .btn-success:hover {
-          background: #218838;
+          background: #218838ff;
         }
 
         .btn-danger {
-          background: #dc3545;
+          background: #dc3545ff;
           color: white;
         }
 
         .btn-danger:hover {
-          background: #c82333;
+          background: #c82333ff;
         }
 
         button:disabled {
@@ -419,25 +419,25 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
         }
 
         .message.success {
-          background: #d4edda;
-          color: #155724;
-          border: 1px solid #c3e6cb;
+          background: #d4eddaff;
+          color: #155724ff;
+          border: 1px solid #c3e6cbff;
         }
 
         .message.error {
-          background: #f8d7da;
-          color: #721c24;
-          border: 1px solid #f5c6cb;
+          background: #f8d7daff;
+          color: #721c24ff;
+          border: 1px solid #f5c6cbff;
         }
 
         .message.info {
-          background: #d1ecf1;
-          color: #0c5460;
-          border: 1px solid #bee5eb;
+          background: #d1ecf1ff;
+          color: #0c5460ff;
+          border: 1px solid #bee5ebff;
         }
 
         .upload-section {
-          background: #f9f9f9;
+          background: #f9f9f9ff;
           padding: 20px;
           border-radius: 8px;
           margin-bottom: 20px;
@@ -449,7 +449,7 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
 
         input[type="file"] {
           padding: 5px;
-          border: 1px solid #ddd;
+          border: 1px solid #ddddddff;
           border-radius: 3px;
         }
 
@@ -465,7 +465,7 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
 
         .event-selector input {
           padding: 8px;
-          border: 1px solid #ddd;
+          border: 1px solid #ddddddff;
           border-radius: 3px;
           width: 200px;
         }
@@ -609,3 +609,5 @@ export const FaceScan: React.FC<RecordsProps> = ({ role }) => {
 };
 
 export default FaceScan;
+
+

@@ -18,6 +18,8 @@ from app.routers import (
     security_center,
     subscription,
     governance,
+    ssg,
+    ssg_alias,
 )
 from app.services.face_recognition import FaceRecognitionService
 from pathlib import Path
@@ -50,6 +52,8 @@ app.include_router(notifications.router)
 app.include_router(security_center.router)
 app.include_router(subscription.router)
 app.include_router(governance.router)
+app.include_router(ssg.router)
+app.include_router(ssg_alias.router)
 
 logo_storage_dir = Path(settings.school_logo_storage_dir)
 logo_storage_dir.mkdir(parents=True, exist_ok=True)

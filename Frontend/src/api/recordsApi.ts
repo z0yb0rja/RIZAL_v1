@@ -12,3 +12,5 @@ export const fetchStudentRecords = async () => {
     throw error;
   }
 };
+
+

@@ -21,6 +21,7 @@ class Settings:
     secret_key: str
     jwt_algorithm: str
     access_token_expire_minutes: int
+    mfa_enabled: bool
 
     import_max_file_size_mb: int
     import_chunk_size: int
@@ -38,6 +39,7 @@ class Settings:
     smtp_password: str
     smtp_from_email: str
     smtp_use_tls: bool
+    smtp_use_ssl: bool
     login_url: str
 
     school_logo_storage_dir: str
@@ -54,6 +56,7 @@ def get_settings() -> Settings:
         secret_key=os.getenv("SECRET_KEY", "change-this-secret-in-production"),
         jwt_algorithm=os.getenv("JWT_ALGORITHM", "HS256"),
         access_token_expire_minutes=int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "30")),
+        mfa_enabled=_as_bool(os.getenv("MFA_ENABLED"), True),
         import_max_file_size_mb=int(os.getenv("IMPORT_MAX_FILE_SIZE_MB", "50")),
         import_chunk_size=max(1, int(os.getenv("IMPORT_CHUNK_SIZE", "5000"))),
         import_storage_dir=os.getenv("IMPORT_STORAGE_DIR", "/tmp/valid8_imports"),
@@ -62,12 +65,13 @@ def get_settings() -> Settings:
         celery_broker_url=os.getenv("CELERY_BROKER_URL", redis_url),
         celery_result_backend=os.getenv("CELERY_RESULT_BACKEND", redis_url),
         celery_task_time_limit_seconds=max(60, int(os.getenv("CELERY_TASK_TIME_LIMIT_SECONDS", "10800"))),
-        smtp_host=os.getenv("SMTP_HOST", ""),
+        smtp_host=(os.getenv("SMTP_HOST") or "").strip(),
         smtp_port=int(os.getenv("SMTP_PORT", "587")),
-        smtp_username=os.getenv("SMTP_USERNAME", ""),
-        smtp_password=os.getenv("SMTP_PASSWORD", ""),
-        smtp_from_email=os.getenv("SMTP_FROM_EMAIL", "noreply@valid8.local"),
+        smtp_username=(os.getenv("SMTP_USERNAME") or "").strip(),
+        smtp_password=(os.getenv("SMTP_PASSWORD") or "").strip(),
+        smtp_from_email=(os.getenv("SMTP_FROM_EMAIL") or "noreply@valid8.local").strip(),
         smtp_use_tls=_as_bool(os.getenv("SMTP_USE_TLS"), True),
+        smtp_use_ssl=_as_bool(os.getenv("SMTP_USE_SSL"), False),
         login_url=os.getenv("LOGIN_URL", "http://localhost:5173"),
         school_logo_storage_dir=os.getenv("SCHOOL_LOGO_STORAGE_DIR", "/tmp/valid8_school_logos"),
         school_logo_max_file_size_mb=max(1, int(os.getenv("SCHOOL_LOGO_MAX_FILE_SIZE_MB", "2"))),

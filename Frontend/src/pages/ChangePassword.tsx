@@ -168,8 +168,8 @@ const ChangePassword = () => {
                 className="btn btn-primary"
                 disabled={loading}
                 style={{
-                  backgroundColor: "var(--primary-color, #162F65)",
-                  borderColor: "var(--primary-color, #162F65)",
+                  backgroundColor: "var(--primary-color, #162F65ff)",
+                  borderColor: "var(--primary-color, #162F65ff)",
                 }}
               >
                 {loading ? "Updating..." : "Update Password"}
@@ -186,3 +186,5 @@ const ChangePassword = () => {
 };
 
 export default ChangePassword;
+
+

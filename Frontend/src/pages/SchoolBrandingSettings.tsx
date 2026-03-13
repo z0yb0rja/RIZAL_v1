@@ -16,8 +16,8 @@ const SchoolBrandingSettings = () => {
   const [settings, setSettings] = useState<SchoolSettings | null>(null);
   const [form, setForm] = useState<SchoolSettingsUpdatePayload>({
     school_name: "",
-    primary_color: "#162F65",
-    secondary_color: "#2C5F9E",
+    primary_color: "#162F65ff",
+    secondary_color: "#2C5F9Eff",
     school_code: "",
   });
   const [logoFile, setLogoFile] = useState<File | null>(null);
@@ -42,7 +42,7 @@ const SchoolBrandingSettings = () => {
         setForm({
           school_name: data.school_name,
           primary_color: data.primary_color,
-          secondary_color: data.secondary_color || "#2C5F9E",
+          secondary_color: data.secondary_color || "#2C5F9Eff",
           school_code: data.school_code || "",
         });
       } catch (err) {
@@ -105,7 +105,7 @@ const SchoolBrandingSettings = () => {
       setForm({
         school_name: updated.school_name,
         primary_color: updated.primary_color,
-        secondary_color: updated.secondary_color || "#2C5F9E",
+        secondary_color: updated.secondary_color || "#2C5F9Eff",
         school_code: updated.school_code || "",
       });
       setLogoFile(null);
@@ -119,7 +119,7 @@ const SchoolBrandingSettings = () => {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "#f5f7fa" }}>
+    <div style={{ minHeight: "100vh", background: "var(--page-background, #f5f7faff)" }}>
       <NavbarSchoolIT />
 
       <main className="container py-4">
@@ -170,7 +170,7 @@ const SchoolBrandingSettings = () => {
                   <input
                     type="color"
                     className="form-control form-control-color"
-                    value={form.primary_color || "#162F65"}
+                    value={form.primary_color || "#162F65ff"}
                     onChange={(e) => updateField("primary_color", e.target.value)}
                   />
                 </div>
@@ -180,7 +180,7 @@ const SchoolBrandingSettings = () => {
                   <input
                     type="color"
                     className="form-control form-control-color"
-                    value={form.secondary_color || "#2C5F9E"}
+                    value={form.secondary_color || "#2C5F9Eff"}
                     onChange={(e) => updateField("secondary_color", e.target.value)}
                   />
                 </div>
@@ -201,8 +201,8 @@ const SchoolBrandingSettings = () => {
                     onClick={handleSubmit}
                     disabled={saving}
                     style={{
-                      backgroundColor: "var(--primary-color, #162F65)",
-                      borderColor: "var(--primary-color, #162F65)",
+                      backgroundColor: "var(--primary-color, #162F65ff)",
+                      borderColor: "var(--primary-color, #162F65ff)",
                     }}
                   >
                     <FaSave className="me-2" />
@@ -230,10 +230,10 @@ const SchoolBrandingSettings = () => {
                             width: 56,
                             height: 56,
                             borderRadius: "50%",
-                            background: "#e9ecef",
+                            background: "#e9ecefff",
                             display: "grid",
                             placeItems: "center",
-                            color: "#6c757d",
+                            color: "#6c757dff",
                           }}
                         >
                           <FaImage />
@@ -256,3 +256,6 @@ const SchoolBrandingSettings = () => {
 };
 
 export default SchoolBrandingSettings;
+
+
+

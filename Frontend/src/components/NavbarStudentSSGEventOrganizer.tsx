@@ -181,3 +181,5 @@ export const NavbarStudentSSGEventOrganizer = () => {
 };
 
 export default NavbarStudentSSGEventOrganizer;
+
+

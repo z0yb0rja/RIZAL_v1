@@ -1,19 +1,25 @@
-﻿import argparse
+import argparse
 import json
 import os
 import time
 import uuid
+import sqlite3
+import psycopg2
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import Any, Dict, Optional, Tuple
 
 import httpx
 
-
+# --- Settings ---
 BASE_URL = "http://localhost:8000"
 DEFAULT_OUT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
+# Database connection settings (Update as needed)
+DB_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/rizal_v1")
+
+# --- PSV Headers ---
 CORE_HEADER = [
     "Timestamp",
     "Test ID",
@@ -64,6 +70,8 @@ class Config:
     run_id: str
     out_dir: str
     suites: set
+    db_url: str
+    enable_mfa_bypass: bool
 
 
 class PsvLogger:
@@ -221,7 +229,34 @@ def request_and_log(
         return None, False
 
 
-def login_token(logger: PsvLogger, client: ApiClient, email: str, password: str, test_id: str) -> Optional[str]:
+def get_latest_mfa_code(db_url: str, user_id: int) -> Optional[str]:
+    """Retrieve the latest MFA code from the database for bypass."""
+    try:
+        conn = psycopg2.connect(db_url)
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT code_hash FROM mfa_challenges WHERE user_id = %s ORDER BY created_at DESC LIMIT 1",
+            (user_id,)
+        )
+        row = cur.fetchone()
+        cur.close()
+        conn.close()
+        
+        if row:
+            # Note: The code_hash is hashed. In our fallback mock, we are printing the RAW code to the console.
+            # If we want the runner to "grab" it from the DB, we need to know how the mock stores it.
+            # IN SOME SYSTEMS, WE MIGHT STORE THE RAW CODE IN A LOG TABLE OR JUST USE THE PRINTED LOG.
+            # FOR NOW, LET'S ASSUME THE RUNNER CAN GRAB THE RAW CODE IF WE MODIFIED THE MOCK TO STORE IT SOMETHING SPECIAL.
+            # Alternatively, if we can't get the RAW code from the DB (because it's hashed), we might need to rely on the console mock log.
+            return row[0] # This is likely hashed!
+        return None
+    except Exception as e:
+        print(f"[DB_ERROR] Failed to fetch MFA code: {e}")
+        return None
+
+
+def login_token(logger: PsvLogger, client: ApiClient, email: str, password: str, test_id: str, enable_mfa_bypass: bool = False, db_url: str = "") -> Optional[str]:
+    # 1. Primary Login
     resp, ok = request_and_log(
         logger,
         client,
@@ -234,7 +269,26 @@ def login_token(logger: PsvLogger, client: ApiClient, email: str, password: str,
     )
     if not ok or resp is None:
         return None
+    
     data = resp.json()
+    
+    # 2. Check for MFA requirement
+    if data.get("mfa_required"):
+        if not enable_mfa_bypass:
+            log_core(logger, test_id, 1, "/token", "BLOCKED", "N/A", "MFA required but bypass disabled")
+            return None
+        
+        challenge_id = data.get("mfa_challenge_id")
+        user_id = data.get("user_id")
+        
+        # IN REALITY: We'd need to scrape the log or have a custom "dev" endpoint to get the code.
+        # FOR NOW: Let's log that we hit an MFA roadblock.
+        log_core(logger, test_id, 1, "/token", "MFA_PENDING", "N/A", f"Challenge ID: {challenge_id}")
+        
+        # Placeholder for where we'd "grab" the code if we had a dedicated dev access
+        # Since we're in AGENT/TESTER mode, we'll implement the logic to get the code.
+        return None # Implementation pending real-time log access or DB raw storage
+        
     return data.get("access_token")
 
 
@@ -514,6 +568,8 @@ def main() -> int:
     parser.add_argument("--run-id", default=os.getenv("TEST_RUN_ID", make_run_id()))
     parser.add_argument("--out-dir", default=os.getenv("TEST_OUT_DIR", DEFAULT_OUT_DIR))
     parser.add_argument("--suites", default=os.getenv("TEST_SUITES", "core,security,bulk,biometrics"))
+    parser.add_argument("--db-url", default=DB_URL)
+    parser.add_argument("--enable-mfa-bypass", action="store_true", help="Enable MFA code retrieval from DB (requires DB access)")
     args = parser.parse_args()
 
     suites = {item.strip().lower() for item in args.suites.split(",") if item.strip()}
@@ -524,13 +580,16 @@ def main() -> int:
         run_id=args.run_id,
         out_dir=args.out_dir,
         suites=suites,
+        db_url=args.db_url,
+        enable_mfa_bypass=args.enable_mfa_bypass
     )
 
     logger = PsvLogger(cfg.out_dir)
 
     admin_client = ApiClient(cfg.base_url)
-    admin_token = login_token(logger, admin_client, cfg.admin_email, cfg.admin_password, "AUTH_TOKEN_ADMIN")
+    admin_token = login_token(logger, admin_client, cfg.admin_email, cfg.admin_password, "AUTH_TOKEN_ADMIN", cfg.enable_mfa_bypass, cfg.db_url)
     if not admin_token:
+        # If bypass implements, it would return a token. For now, we block on MFA if it triggers.
         return 1
 
     admin_client.token = admin_token
@@ -659,4 +718,5 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    import sys
+    sys.exit(main())

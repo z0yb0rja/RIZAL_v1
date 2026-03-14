@@ -18,7 +18,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 # Install the Python dependencies
-RUN pip install --default-timeout=100 --no-cache-dir -r requirements.txt
+RUN MAKEFLAGS="-j1" pip install --default-timeout=300 --no-cache-dir -r requirements.txt
 
 # Copy all backend source code into the container
 COPY . .

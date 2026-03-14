@@ -8,7 +8,7 @@ click==8.1.8
 colorama==0.4.6
 coverage==7.8.0
 cryptography==44.0.2
-dlib==19.24.8
+dlib-bin
 dnspython==2.7.0
 ecdsa==0.19.1
 email_validator==2.2.0

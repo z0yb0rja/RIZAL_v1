@@ -1,4 +1,4 @@
-\import numpy as np
+import numpy as np
 import pickle
 from typing import Optional
 from deepface import DeepFace

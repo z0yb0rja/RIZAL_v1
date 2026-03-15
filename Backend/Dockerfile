@@ -18,8 +18,6 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 
 # Install the Python dependencies
-RUN pip install --no-cache-dir cmake
-RUN export MAKEFLAGS="-j1" && pip install --no-cache-dir dlib==19.24.8
 RUN pip install --default-timeout=300 --no-cache-dir -r requirements.txt
 
 # Copy all backend source code into the container

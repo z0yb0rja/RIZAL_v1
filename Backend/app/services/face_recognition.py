@@ -43,18 +43,3 @@ class FaceRecognitionService:
                 self.known_faces = pickle.load(f)
         except FileNotFoundError:
             self.known_faces = {}
-```
-
----
-
-Pagkahuman, i-update ang `requirements.txt` — **tanggala** ni:
-```
-dlib==19.24.8
-face-recognition==1.3.0
-face_recognition_models==0.3.0
-```
-
-**I-add** ni:
-```
-deepface==0.0.93
-opencv-python-headless==4.9.0.80
